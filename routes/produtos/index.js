@@ -18,7 +18,7 @@ produtos.getById = function(req, res) {
     }
 
     // SQL Query > Select Data
-    var query = client.query("SELECT * FROM produtoss ORDER BY id ASC;");
+    var query = client.query("SELECT * FROM Produto ORDER BY id ASC;");
 
     // Stream results back one row at a time
     query.on('row', function(row) {
@@ -55,7 +55,7 @@ produtos.add = function(req, res) {
     client.query("INSERT INTO produtoss(text, complete) values($1, $2)", [data.text, data.complete]);
 
     // SQL Query > Select Data
-    var query = client.query("SELECT * FROM items ORDER BY id ASC");
+    var query = client.query("SELECT * FROM Produto ORDER BY id ASC");
 
     // Stream results back one row at a time
     query.on('row', function(row) {
@@ -92,10 +92,10 @@ produtos.update = function(req, res) {
     }
 
     // SQL Query > Update Data
-    client.query("UPDATE items SET text=($1), complete=($2) WHERE id=($3)", [data.text, data.complete, id]);
+    client.query("UPDATE Produto SET text=($1), complete=($2) WHERE id=($3)", [data.text, data.complete, id]);
 
     // SQL Query > Select Data
-    var query = client.query("SELECT * FROM items ORDER BY id ASC");
+    var query = client.query("SELECT * FROM Produto ORDER BY id ASC");
 
     // Stream results back one row at a time
     query.on('row', function(row) {
@@ -129,10 +129,10 @@ produtos.delete = function(req, res) {
     }
 
     // SQL Query > Delete Data
-    client.query("DELETE FROM items WHERE id=($1)", [id]);
+    client.query("DELETE FROM Produto WHERE id=($1)", [id]);
 
     // SQL Query > Select Data
-    var query = client.query("SELECT * FROM items ORDER BY id ASC");
+    var query = client.query("SELECT * FROM Produto ORDER BY id ASC");
 
     // Stream results back one row at a time
     query.on('row', function(row) {
