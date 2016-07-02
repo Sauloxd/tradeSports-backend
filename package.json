@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/Sauloxd/tradeSports-backend/issues"
   },
-  "homepage": "https://github.com/Sauloxd/tradeSports-backend#readme"
+  "homepage": "https://github.com/Sauloxd/tradeSports-backend#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "path": "^0.12.7",
+    "pg": "^6.0.1"
+  }
 }

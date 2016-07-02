@@ -1,0 +1,11 @@
+# Produtos
+ - idProduto
+ - Valor
+ - Nome
+ - Imagem
+ - Descrição
+ - Peso
+ - Tamanho
+ - Fabricante
+ - Quantidade
+ - Tipo
