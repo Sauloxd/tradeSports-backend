@@ -1,7 +1,10 @@
 var express = require('express');
 var routes = require('./routes');
-
+var bodyParser = require('body-parser');
 var app = express();
+
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 app.use(express.static('public'));
 
@@ -11,16 +14,12 @@ app.use(express.static('public'));
 //   next();
 // });
 
-// Product CRUD
-app.get('/produto/:id', routes.produtos.getById);
-
+// Produto CRUD
+app.get('/produto/:idProduto', routes.produtos.getById);
+app.get('/produto', routes.produtos.get);
 app.post('/produto', routes.produtos.add);
-
-app.put('/produto/:id', routes.produtos.update);
-
-app.delete('/produto/:id', routes.produtos.delete);
-
-
+app.put('/produto/:idProduto', routes.produtos.update);
+app.delete('/produto/:idProduto', routes.produtos.delete);
 
 app.listen(3000, function () {
   console.log('The service is on port 3000!');
