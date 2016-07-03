@@ -69,6 +69,7 @@ produtos.getById = function(req, res) {
 }
 
 produtos.add = function(req, res) {
+  console.log('add was called!');
   var results = [];
 
   // Grab data from http request
@@ -76,7 +77,7 @@ produtos.add = function(req, res) {
     Valor: req.body.Valor,
     Nome: req.body.Nome,
     Imagem: req.body.Imagem,
-    Descrição: req.body.Descrição,
+    Descrição: req.body.Descricao,
     Peso: req.body.Peso,
     Tamanho: req.body.Tamanho,
     Fabricante: req.body.Fabricante,

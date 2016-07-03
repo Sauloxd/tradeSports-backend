@@ -7,7 +7,7 @@
                     <a class="dropdown-toggle" dropdown-toggle href>
                             <span class="clear">
                                 <span class="block m-t-xs">
-                                    <strong class="font-bold">{{main.userName}}</strong>
+                                    <strong class="font-bold">Saulo</strong>
                              </span>
                                 <span class="text-muted text-xs block">Example menu<b class="caret"></b></span>
                             </span>
@@ -22,12 +22,14 @@
 
             </li>
 
-            <li ui-sref-active="active">
-                <a ui-sref="index.main"><i class="fa fa-laptop"></i> <span class="nav-label">Main page</span> </a>
+            <li ng-class="{active: $state.includes('index')}">
+                <a><i class="fa fa-dashboard"></i> <span class="nav-label">Produto</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level" ng-class="{in: $state.includes('dashboard')}">
+                    <li ui-sref-active="active"><a ui-sref="index.produto"> <i class="fa fa-table"></i> Table </a></li>
+                    <li ui-sref-active="active"><a ui-sref="index.produto-add"> <i class="fa fa-plus"></i> Add </a></li>
+                </ul>
             </li>
-            <li ui-sref-active="active">
-                <a ui-sref="index.minor"><i class="fa fa-desktop"></i> <span class="nav-label">Minor page</span></a>
-            </li>
+
         </ul>
 
     </div>
