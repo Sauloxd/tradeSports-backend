@@ -8,6 +8,13 @@ angular
             url: "/index",
             templateUrl: "components/common/content.html"
         })
+        .state('login', {
+            url: "/login",
+            templateUrl: "app/pages/login/login.html",
+            controller: loginCtrl,
+            controllerAs: 'loginVm',
+            data: { pageTitle: 'Login', specialClass: 'gray-bg' }
+        })
         .state('index.produto', {
             url: "/produto",
             templateUrl: "app/pages/produto/produto.html",
@@ -22,5 +29,5 @@ angular
         })
         ;
 
-    $urlRouterProvider.otherwise('/index/produto-add');
+    $urlRouterProvider.otherwise('/login');
   });
