@@ -24,9 +24,17 @@
 
             <li ng-class="{active: $state.includes('index')}">
                 <a><i class="fa fa-dashboard"></i> <span class="nav-label">Produto</span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level" ng-class="{in: $state.includes('dashboard')}">
+                <ul class="nav nav-second-level">
                     <li ui-sref-active="active"><a ui-sref="index.produto"> <i class="fa fa-table"></i> Table </a></li>
                     <li ui-sref-active="active"><a ui-sref="index.produto-add"> <i class="fa fa-plus"></i> Add </a></li>
+                </ul>
+            </li>
+
+            <li ng-class="{active: $state.includes('usuario')}">
+                <a><i class="fa fa-dashboard"></i> <span class="nav-label">Usuarios</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li ui-sref-active="active"><a ui-sref="usuario.cliente"> <i class="fa fa-table"></i> Cliente </a></li>
+                    <li ui-sref-active="active"><a ui-sref="usuario.administrador"> <i class="fa fa-plus"></i> Adminsitrador </a></li>
                 </ul>
             </li>
 
