@@ -6,7 +6,7 @@ var client = new pg.Client(connectionString);
 client.connect();
 
 var query = client.query(
-  'CREATE TABLE administrador('       +
+  'CREATE TABLE Administrador('       +
     'cpf numeric PRIMARY KEY,'        +
     'nome varchar(255) not null,'    +
     'login varchar(255) not null,'     +
