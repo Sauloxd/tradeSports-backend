@@ -6,7 +6,7 @@ var client = new pg.Client(connectionString);
 client.connect();
 
 var query = client.query(
-  'CREATE TABLE Produto('            +
+  'CREATE TABLE Produto('                +
     'idProduto SERIAL PRIMARY KEY,'      +
     'valor numeric(30) not null,'        +
     'nome varchar(255) not null,'        +
@@ -16,7 +16,7 @@ var query = client.query(
     'tamanho varchar(255) not null,'     +
     'fabricante varchar(255) not null,'  +
     'quantidade numeric(30) not null,'   +
-    'tipo varchar(255) not null'      +
+    'tipo varchar(255) not null'         +
   ')'
 );
 

@@ -3,14 +3,14 @@ var produtoAddCtrl = function (produtoService) {
   vm.formData = {};
 
   vm.fillForm = function(){
-    vm.formData.Nome = "Tenis";
-    vm.formData.Valor = 999;
-    vm.formData.Descricao = "Tenis de couro  com muito gliter, do jeito que o ricado gosta";
-    vm.formData.Peso = 999;
-    vm.formData.Fabricante = "Chineis";
-    vm.formData.Tamanho = "pequeno";
-    vm.formData.Quantidade = 99;
-    vm.formData.Tipo = "Calcado";
+    vm.formData.nome = "Tenis";
+    vm.formData.valor = 999;
+    vm.formData.descricao = "Tenis de couro  com muito gliter, do jeito que o ricado gosta";
+    vm.formData.peso = 999;
+    vm.formData.fabricante = "Chineis";
+    vm.formData.tamanho = "pequeno";
+    vm.formData.quantidade = 99;
+    vm.formData.tipo = "Calcado";
   }
 
   vm.resetForm = function(){
