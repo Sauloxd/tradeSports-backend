@@ -2,9 +2,9 @@ var path = require('path');
 var pg = require('pg');
 var connectionString = require(path.join(__dirname, '../', '../', 'config'));
 
-var produtos = {};
+var clientes = {};
 
-produtos.get = function(req, res) {
+clientes.get = function(req, res) {
 
   var results = [];
 
@@ -18,7 +18,7 @@ produtos.get = function(req, res) {
     }
 
     // SQL Query > Select Data
-    var query = client.query("SELECT * FROM Produto ORDER BY idProduto;");
+    var query = client.query("SELECT * FROM Cliente;");
 
     // Stream results back one row at a time
     query.on('row', function(row) {
@@ -35,10 +35,10 @@ produtos.get = function(req, res) {
 
 }
 
-produtos.getById = function(req, res) {
+clientes.getById = function(req, res) {
 
   var results = [];
-  var _id = req.params.idProduto;
+  var _id = req.params.cpf;
 
 
   // Get a Postgres client from the connection pool
@@ -51,7 +51,7 @@ produtos.getById = function(req, res) {
     }
 
     // SQL Query > Select Data
-    var query = client.query("SELECT * FROM Produto WHERE idProduto="+ _id +"ORDER BY idProduto;");
+    var query = client.query("SELECT * FROM Cliente WHERE cpf="+ _id +";");
 
     // Stream results back one row at a time
     query.on('row', function(row) {
@@ -68,21 +68,18 @@ produtos.getById = function(req, res) {
 
 }
 
-produtos.add = function(req, res) {
+clientes.add = function(req, res) {
   console.log('add was called!');
   var results = [];
 
   // Grab data from http request
   var data = {
-    Valor: req.body.valor,
+    CPF: req.body.cpf,
     Nome: req.body.nome,
-    Imagem: req.body.imagem,
-    Descrição: req.body.descricao,
-    Peso: req.body.peso,
-    Tamanho: req.body.tamanho,
-    Fabricante: req.body.fabricante,
-    Quantidade: req.body.quantidade,
-    Tipo: req.body.tipo
+    Login: req.body.login,
+    Senha: req.body.senha,
+    Telefone: req.body.telefone,
+    Email: req.body.email
   };
 
   // Get a Postgres client from the connection pool
@@ -95,20 +92,17 @@ produtos.add = function(req, res) {
     }
 
     // SQL Query > Insert Data
-    client.query('INSERT INTO Produto(' +
-      'valor,'                          +
+    client.query('INSERT INTO Cliente(' +
+      'cpf,'                          +
       'nome,'                           +
-      'imagem,'                         +
-      'descrição,'                      +
-      'peso,'                           +
-      'tamanho,'                        +
-      'fabricante,'                     +
-      'quantidade,'                     +
-      'tipo'                            +
-    ') values($1, $2, $3, $4, $5, $6, $7, $8, $9)', [data.Valor, data.Nome, data.Imagem, data.Descrição, data.Peso, data.Tamanho, data.Fabricante, data.Quantidade, data.Tipo]);
+      'login,'                         +
+      'senha,'                      +
+      'telefone,'                           +
+      'email,'                        +
+    ') values($1, $2, $3, $4, $5, $6)', [data.CPF, data.Nome, data.Login, data.Senha, data.Telefone, data.Email]);
 
     // SQL Query > Select Data
-    var query = client.query("SELECT * FROM Produto ORDER BY idProduto DESC LIMIT 1");
+    var query = client.query("SELECT * FROM Cliente WHERE cpf=" + data.CPF);
 
     // Stream results back one row at a time
     query.on('row', function(row) {
@@ -125,24 +119,20 @@ produtos.add = function(req, res) {
   });
 }
 
-produtos.update = function(req, res) {
+clientes.update = function(req, res) {
 
   var results = [];
 
   // Grab data from the URL parameters
-  var id = req.params.idProduto;
+  var id = req.params.cpf;
 
   // Grab data from http request
   var data = {
-    Valor: req.body.valor,
     Nome: req.body.nome,
-    Imagem: req.body.imagem,
-    Descrição: req.body.descrição,
-    Peso: req.body.peso,
-    Tamanho: req.body.tamanho,
-    Fabricante: req.body.fabricante,
-    Quantidade: req.body.quantidade,
-    Tipo: req.body.tipo
+    Login: req.body.login,
+    Senha: req.body.senha,
+    Telefone: req.body.telefone,
+    Email: req.body.email
   };
 
   // Get a Postgres client from the connection pool
@@ -155,10 +145,10 @@ produtos.update = function(req, res) {
     }
 
     // SQL Query > Update Data
-    client.query("UPDATE Produto SET valor=($1), nome=($2), imagem=($3), descrição=($4), peso=($5), tamanho=($6), fabricante=($7), quantidade=($8), yipo=($9) WHERE idProduto=($10)", [data.Valor, data.Nome, data.Imagem, data.Descrição, data.Peso, data.Tamanho, data.Fabricante, data.Quantidade, data.Tipo, id]);
+    client.query("UPDATE Produto SET nome=($1), login=($2), senha=($3), telefone=($4), email=($5) WHERE cpf=($5)", [data.Nome, data.Login, data.Senha, data.Telefone, data.Email, id]);
 
     // SQL Query > Select Data
-    var query = client.query("SELECT * FROM Produto ORDER BY idProduto ASC");
+    var query = client.query("SELECT * FROM Cliente");
 
     // Stream results back one row at a time
     query.on('row', function(row) {
@@ -174,12 +164,12 @@ produtos.update = function(req, res) {
 
 }
 
-produtos.delete = function(req, res) {
+clientes.delete = function(req, res) {
 
   var results = [];
 
   // Grab data from the URL parameters
-  var id = req.params.idProduto;
+  var id = req.params.cpf;
 
 
   // Get a Postgres client from the connection pool
@@ -192,10 +182,10 @@ produtos.delete = function(req, res) {
     }
 
     // SQL Query > Delete Data
-    client.query("DELETE FROM Produto WHERE idProduto=($1)", [id]);
+    client.query("DELETE FROM Cliente WHERE cpf=($1)", [id]);
 
     // SQL Query > Select Data
-    var query = client.query("SELECT * FROM Produto ORDER BY idProduto ASC");
+    var query = client.query("SELECT * FROM Cliente");
 
     // Stream results back one row at a time
     query.on('row', function(row) {
@@ -211,4 +201,4 @@ produtos.delete = function(req, res) {
 
 }
 
-module.exports = produtos;
+module.exports = clientes;
