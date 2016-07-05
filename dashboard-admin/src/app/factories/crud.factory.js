@@ -15,6 +15,12 @@ var crudService = function ($http, $q) {
     });
   }
 
+  crud.get = function(table){
+    console.log('getting ', table);
+    return $http
+      .get("http://localhost:3000/" + table)
+  }
+
   return crud;
 
 };
