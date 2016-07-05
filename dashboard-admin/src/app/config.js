@@ -20,33 +20,46 @@ angular
             url: "/usuario",
             templateUrl: "components/common/content.html"
         })
-        .state('usuario.administrador', {
-            url: "/administrador",
-            controller: administradorCtrl,
+        .state('usuario.cliente', {
+            url: "/cliente",
+            controller: clienteCtrl,
             controllerAs: "vm",
-            templateUrl: "app/pages/administrador/administrador.html",
-            data: { pageTitle: 'Administrador' }
+            templateUrl: "app/pages/cliente/cliente-table.html",
+            data: { pageTitle: 'Cliente' }
         })
-        .state('index.produto', {
-            url: "/produto",
-            templateUrl: "app/pages/produto/produto.html",
-            data: { pageTitle: 'Produto' }
-        })
-        .state('index.produto-add', {
-            url: "/produto-add",
-            controller: produtoAddCtrl,
-            controllerAs: "vm",
-            templateUrl: "app/pages/produto/produto-add.html",
-            data: { pageTitle: 'Add new Produto' }
-        })
-        .state('index.cliente-add', {
-            url: "/cliente-add",
+        .state('usuario.cliente-add', {
+            url: "/addCliente",
             controller: clienteAddCtrl,
             controllerAs: "vm",
             templateUrl: "app/pages/cliente/cliente-add.html",
             data: { pageTitle: 'Add new Cliente' }
         })
-        ;
+        .state('usuario.administrador', {
+            url: "/administrador",
+            controller: administradorCtrl,
+            controllerAs: "vm",
+            templateUrl: "app/pages/administrador/administrador-table.html",
+            data: { pageTitle: 'Administrador' }
+        })
+        .state('usuario.administrador-add', {
+            url: "/addAdministrador",
+            controller: administradorAddCtrl,
+            controllerAs: "vm",
+            templateUrl: "app/pages/administrador/administrador-add.html",
+            data: { pageTitle: 'Administrador' }
+        })
+        .state('produto.table', {
+            url: "/table",
+            templateUrl: "app/pages/produto/produto-table.html",
+            data: { pageTitle: 'Produto' }
+        })
+        .state('produto.add', {
+            url: "/add",
+            controller: produtoAddCtrl,
+            controllerAs: "vm",
+            templateUrl: "app/pages/produto/produto-add.html",
+            data: { pageTitle: 'Add new Produto' }
+        });
 
-    $urlRouterProvider.otherwise('index/produto');
+    $urlRouterProvider.otherwise('produto/table');
   });
