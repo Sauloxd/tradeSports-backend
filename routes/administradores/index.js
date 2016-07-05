@@ -96,8 +96,8 @@ administradores.add = function(req, res) {
       'nome,'                                 +
       'login,'                                +
       'senha,'                                +
-      'email,'                                +
-    ') values($1, $2, $3, $4, $5)', [data.cpf, data.nome, data.login, data.senha, data.email]);
+      'email'                                +
+    ') values($1, $2, $3, $4, $5)', [data.CPF, data.Nome, data.Login, data.Senha, data.Email]);
 
     // SQL Query > Select Data
     var query = client.query("SELECT * FROM Administrador ORDER BY nome DESC LIMIT 1");

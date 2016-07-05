@@ -1,6 +1,6 @@
 var pg = require('pg');
 var path = require('path');
-var connectionString = require(path.join(__dirname, '../', 'config'));
+var connectionString = require(path.join(__dirname, '../../', 'config'));
 
 var client = new pg.Client(connectionString);
 client.connect();
@@ -11,7 +11,7 @@ var query = client.query(
     'nome varchar(255) not null,'    +
     'login varchar(255) not null,'     +
     'senha varchar(255) not null,'    +
-    'email varchar(255) not null,'    +
+    'email varchar(255) not null'    +
   ')'
 );
 

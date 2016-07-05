@@ -1,4 +1,4 @@
-var clienteAddCtrl = function (clienteService) {
+var clienteAddCtrl = function (crudService) {
   var vm = this;
   vm.formData = {};
 
@@ -7,8 +7,8 @@ var clienteAddCtrl = function (clienteService) {
     vm.formData.login = "loginteste";
     vm.formData.senha = "senhateste";
     vm.formData.email = "teste@teste.com";
-    vm.formData.cpf = "12345678900";
-    vm.formData.telefone = "11999999999";
+    vm.formData.cpf = 12345678900;
+    vm.formData.telefone = 11999999999;
   }
 
   vm.resetForm = function(){
@@ -16,7 +16,7 @@ var clienteAddCtrl = function (clienteService) {
   };
 
   vm.submitForm = function(){
-    clienteService.post(vm.formData)
+    crudService.post('cliente', vm.formData)
       .then(function(){
         console.log('Success!');
       }, function(err){
