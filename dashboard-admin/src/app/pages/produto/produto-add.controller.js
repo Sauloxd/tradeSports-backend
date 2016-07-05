@@ -1,4 +1,4 @@
-var produtoAddCtrl = function (produtoService) {
+var produtoAddCtrl = function (crudService) {
   var vm = this;
   vm.formData = {};
 
@@ -18,12 +18,7 @@ var produtoAddCtrl = function (produtoService) {
   };
 
   vm.submitForm = function(){
-    produtoService.post(vm.formData)
-      .then(function(){
-        console.log('Success!');
-      }, function(err){
-        console.log('err', err);
-      });
+    crudService.post('produto', vm.formData);
   };
 
 }

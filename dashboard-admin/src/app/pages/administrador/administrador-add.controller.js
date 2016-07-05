@@ -15,7 +15,7 @@ var administradorAddCtrl = function (administradorService) {
   };
 
   vm.submitForm = function(){
-    administradorService.post(vm.formData)
+    crudService.post('administrador', vm.formData)
       .then(function(){
         console.log('Success!');
       }, function(err){

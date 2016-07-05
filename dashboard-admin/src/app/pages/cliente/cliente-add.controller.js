@@ -16,7 +16,7 @@ var clienteAddCtrl = function (clienteService) {
   };
 
   vm.submitForm = function(){
-    clienteService.post(vm.formData)
+    crudService.post('cliente', vm.formData)
       .then(function(){
         console.log('Success!');
       }, function(err){

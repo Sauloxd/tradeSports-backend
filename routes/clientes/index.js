@@ -69,7 +69,7 @@ clientes.getById = function(req, res) {
 }
 
 clientes.add = function(req, res) {
-  console.log('add was called!');
+  console.log('Cliente add was called!');
   var results = [];
 
   // Grab data from http request
@@ -93,12 +93,12 @@ clientes.add = function(req, res) {
 
     // SQL Query > Insert Data
     client.query('INSERT INTO Cliente(' +
-      'cpf,'                          +
+      'cpf,'                            +
       'nome,'                           +
-      'login,'                         +
-      'senha,'                      +
-      'telefone,'                           +
-      'email,'                        +
+      'login,'                          +
+      'senha,'                          +
+      'telefone,'                       +
+      'email'                          +
     ') values($1, $2, $3, $4, $5, $6)', [data.CPF, data.Nome, data.Login, data.Senha, data.Telefone, data.Email]);
 
     // SQL Query > Select Data
@@ -112,6 +112,7 @@ clientes.add = function(req, res) {
     // After all data is returned, close connection and return results
     query.on('end', function() {
       done();
+      console.log('connected');
       return res.json(results);
     });
 
