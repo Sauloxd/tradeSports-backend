@@ -1,4 +1,4 @@
-var clienteAddCtrl = function (clienteService) {
+var clienteAddCtrl = function (crudService) {
   var vm = this;
   vm.formData = {};
 
