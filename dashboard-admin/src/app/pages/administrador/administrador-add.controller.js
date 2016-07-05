@@ -1,4 +1,4 @@
-var administradorAddCtrl = function (administradorService) {
+var administradorAddCtrl = function (crudService) {
   var vm = this;
   vm.formData = {};
 
