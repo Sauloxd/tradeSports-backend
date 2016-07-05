@@ -17,25 +17,16 @@
                     <th>CPF</th>
                     <th>Nome</th>
                     <th>Login</th>
-                    <th>Telefone</th>
                     <th>E-mail</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td><div class="icheckbox_square-green checked" style="position: relative;"><input type="checkbox" checked="" class="i-checks" name="input[]" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div></td>
-                    <td>Project<small>This is example of project</small></td>
-                    <td><span class="pie" style="display: none;">0.52/1.561</span><svg class="peity" height="16" width="16"><path d="M 8 8 L 8 0 A 8 8 0 0 1 14.933563796318165 11.990700825968545 Z" fill="#1ab394"></path><path d="M 8 8 L 14.933563796318165 11.990700825968545 A 8 8 0 1 1 7.999999999999998 0 Z" fill="#d7d7d7"></path></svg></td>
-                    <td>20%</td>
-                    <td>Jul 14, 2013</td>
-                </tr>
-                <tr>
-                    <td><div class="icheckbox_square-green checked" style="position: relative;"><input type="checkbox" class="i-checks" name="input[]" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div></td>
-                    <td>Alpha project</td>
-                    <td><span class="pie" style="display: none;">6,9</span><svg class="peity" height="16" width="16"><path d="M 8 8 L 8 0 A 8 8 0 0 1 12.702282018339785 14.47213595499958 Z" fill="#1ab394"></path><path d="M 8 8 L 12.702282018339785 14.47213595499958 A 8 8 0 1 1 7.999999999999998 0 Z" fill="#d7d7d7"></path></svg></td>
-                    <td>40%</td>
-                    <td>Jul 16, 2013</td>
-                </tr>
+                    <tr ng-repeat="admin in vm.administradores">
+                        <td>{{admin.cpf}}</td>
+                        <td>{{admin.nome}}</td>
+                        <td>{{admin.login}}</td>
+                        <td>{{admin.email}}</td>
+                        </tr>
                 </tbody>
             </table>
             <div class="hr-line-dashed"></div>

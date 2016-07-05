@@ -18,6 +18,7 @@ var administradorAddCtrl = function (crudService) {
     crudService.post('administrador', vm.formData)
       .then(function(){
         console.log('Success!');
+        location.href = "#/usuario/administrador"
       }, function(err){
         console.log('err', err);
       });

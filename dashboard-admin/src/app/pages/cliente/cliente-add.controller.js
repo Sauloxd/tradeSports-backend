@@ -19,6 +19,7 @@ var clienteAddCtrl = function (crudService) {
     crudService.post('cliente', vm.formData)
       .then(function(){
         console.log('Success!');
+        location.href = "#/usuario/cliente"
       }, function(err){
         console.log('err', err);
       });
