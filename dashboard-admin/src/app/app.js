@@ -7,5 +7,6 @@ angular.module('app', [
                         'ngSanitize',
                         'ngResource',
                         'ui.router',
-                        'ui.bootstrap'
+                        'ui.bootstrap',
+                        'ngMessages'
                       ]);
