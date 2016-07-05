@@ -1,14 +1,13 @@
-var clienteAddCtrl = function (crudService) {
+var administradorAddCtrl = function (administradorService) {
   var vm = this;
   vm.formData = {};
 
   vm.fillForm = function(){
-    vm.formData.nome = "Cliente Teste";
-    vm.formData.login = "clienteteste";
+    vm.formData.nome = "Admin Teste";
+    vm.formData.login = "adminteste";
     vm.formData.senha = "senhateste";
-    vm.formData.email = "cliente@teste.com";
+    vm.formData.email = "admin@teste.com";
     vm.formData.cpf = 12345678900;
-    vm.formData.telefone = 11999999999;
   }
 
   vm.resetForm = function(){
@@ -16,7 +15,7 @@ var clienteAddCtrl = function (crudService) {
   };
 
   vm.submitForm = function(){
-    crudService.post('cliente', vm.formData)
+    administradorService.post(vm.formData)
       .then(function(){
         console.log('Success!');
       }, function(err){
@@ -28,4 +27,4 @@ var clienteAddCtrl = function (crudService) {
 
 angular
   .module('app')
-  .controller('clienteAddCtrl', clienteAddCtrl);
+  .controller('administradorAddCtrl', administradorAddCtrl);

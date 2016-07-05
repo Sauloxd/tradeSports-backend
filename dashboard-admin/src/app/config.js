@@ -15,25 +15,41 @@ angular
             url: "/usuario",
             templateUrl: "components/common/content.html"
         })
-        .state('usuario.administrador', {
-            url: "/administrador",
-            controller: administradorCtrl,
-            controllerAs: "vm",
-            templateUrl: "app/pages/administrador/administrador.html",
-            data: { pageTitle: 'Administrador' }
-        })
         .state('usuario.cliente', {
-            url: "/cliente-add",
+            url: "/cliente",
+            controller: clienteCtrl,
+            controllerAs: "vm",
+            templateUrl: "app/pages/cliente/cliente-table.html",
+            data: { pageTitle: 'Cliente' }
+        })
+        .state('usuario.cliente-add', {
+            url: "/addCliente",
             controller: clienteAddCtrl,
             controllerAs: "vm",
             templateUrl: "app/pages/cliente/cliente-add.html",
             data: { pageTitle: 'Add new Cliente' }
         })
+        .state('usuario.administrador', {
+            url: "/administrador",
+            controller: administradorCtrl,
+            controllerAs: "vm",
+            templateUrl: "app/pages/administrador/administrador-table.html",
+            data: { pageTitle: 'Administrador' }
+        })
+        .state('usuario.administrador-add', {
+            url: "/addAdministrador",
+            controller: administradorAddCtrl,
+            controllerAs: "vm",
+            templateUrl: "app/pages/administrador/administrador-add.html",
+            data: { pageTitle: 'Administrador' }
+        })
+
         .state('produto', {
             abstract: true,
             url: "/produto",
             templateUrl: "components/common/content.html"
         })
+
         .state('produto.table', {
             url: "/table",
             templateUrl: "app/pages/produto/produto-table.html",
@@ -45,9 +61,11 @@ angular
             controllerAs: "vm",
             templateUrl: "app/pages/produto/produto-add.html",
             data: { pageTitle: 'Add new Produto' }
+
         })
 
         ;
 
-    $urlRouterProvider.otherwise('produto/add');
+    $urlRouterProvider.otherwise('produto/table');
+
   });
