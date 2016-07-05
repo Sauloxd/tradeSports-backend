@@ -2,9 +2,9 @@ var path = require('path');
 var pg = require('pg');
 var connectionString = require(path.join(__dirname, '../', '../', 'config'));
 
-var administrador = {};
+var administradores = {};
 
-administrador.get = function(req, res) {
+administradores.get = function(req, res) {
 
   var results = [];
 
@@ -18,7 +18,7 @@ administrador.get = function(req, res) {
     }
 
     // SQL Query > Select Data
-    var query = client.query("SELECT * FROM administrador ORDER BY nome;");
+    var query = client.query("SELECT * FROM Administrador ORDER BY nome;");
 
     // Stream results back one row at a time
     query.on('row', function(row) {
@@ -35,7 +35,7 @@ administrador.get = function(req, res) {
 
 }
 
-administrador.getById = function(req, res) {
+administradores.getById = function(req, res) {
 
   var results = [];
   var _id = req.params.cpf;
@@ -51,7 +51,7 @@ administrador.getById = function(req, res) {
     }
 
     // SQL Query > Select Data
-    var query = client.query("SELECT * FROM administrador WHERE cpf="+ _id +"ORDER BY cpf;");
+    var query = client.query("SELECT * FROM Administrador WHERE cpf="+ _id +"ORDER BY cpf;");
 
     // Stream results back one row at a time
     query.on('row', function(row) {
@@ -68,7 +68,7 @@ administrador.getById = function(req, res) {
 
 }
 
-administrador.add = function(req, res) {
+administradores.add = function(req, res) {
   console.log('add was called!');
   var results = [];
 
@@ -91,7 +91,7 @@ administrador.add = function(req, res) {
     }
 
     // SQL Query > Insert Data
-    client.query('INSERT INTO administrador(' +
+    client.query('INSERT INTO Administrador(' +
       'cpf,'                                  +
       'nome,'                                 +
       'login,'                                +
@@ -100,7 +100,7 @@ administrador.add = function(req, res) {
     ') values($1, $2, $3, $4, $5)', [data.cpf, data.nome, data.login, data.senha, data.email]);
 
     // SQL Query > Select Data
-    var query = client.query("SELECT * FROM administrador ORDER BY nome DESC LIMIT 1");
+    var query = client.query("SELECT * FROM Administrador ORDER BY nome DESC LIMIT 1");
 
     // Stream results back one row at a time
     query.on('row', function(row) {
@@ -117,7 +117,7 @@ administrador.add = function(req, res) {
   });
 }
 
-administrador.update = function(req, res) {
+administradores.update = function(req, res) {
 
   var results = [];
 
@@ -143,10 +143,10 @@ administrador.update = function(req, res) {
     }
 
     // SQL Query > Update Data
-    client.query("UPDATE administrador SET cpf=($1), nome=($2), login=($3), senha=($4), email=($5) WHERE cpf=($6)", [data.cpf, data.nome, data.login, data.senha, data.email, id]);
+    client.query("UPDATE Administrador SET cpf=($1), nome=($2), login=($3), senha=($4), email=($5) WHERE cpf=($6)", [data.cpf, data.nome, data.login, data.senha, data.email, id]);
 
     // SQL Query > Select Data
-    var query = client.query("SELECT * FROM administrador ORDER BY cpf ASC");
+    var query = client.query("SELECT * FROM Administrador ORDER BY cpf ASC");
 
     // Stream results back one row at a time
     query.on('row', function(row) {
@@ -162,7 +162,7 @@ administrador.update = function(req, res) {
 
 }
 
-administrador.delete = function(req, res) {
+administradores.delete = function(req, res) {
 
   var results = [];
 
@@ -180,10 +180,10 @@ administrador.delete = function(req, res) {
     }
 
     // SQL Query > Delete Data
-    client.query("DELETE FROM administrador WHERE cpf=($1)", [id]);
+    client.query("DELETE FROM Administrador WHERE cpf=($1)", [id]);
 
     // SQL Query > Select Data
-    var query = client.query("SELECT * FROM administrador ORDER BY cpf ASC");
+    var query = client.query("SELECT * FROM Administrador ORDER BY cpf ASC");
 
     // Stream results back one row at a time
     query.on('row', function(row) {
@@ -199,4 +199,4 @@ administrador.delete = function(req, res) {
 
 }
 
-module.exports = administrador;
+module.exports = administradores;

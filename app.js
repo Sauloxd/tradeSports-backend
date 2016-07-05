@@ -21,13 +21,20 @@ app.post('/produto', routes.produtos.add);
 app.put('/produto/:idProduto', routes.produtos.update);
 app.delete('/produto/:idProduto', routes.produtos.delete);
 
-app.get('/administrador/:cpf', routes.administrador.getById);
-app.get('/administrador', routes.administrador.get);
-app.post('/administrador', routes.administrador.add);
-app.put('/administrador/:cpf', routes.administrador.update);
-app.delete('/administrador/:cpf', routes.administrador.delete);
+// Administrador CRUD
+app.get('/administrador/:cpf', routes.administradores.getById);
+app.get('/administrador', routes.administradores.get);
+app.post('/administrador', routes.administradores.add);
+app.put('/administrador/:cpf', routes.administradores.update);
+app.delete('/administrador/:cpf', routes.administradores.delete);
 
 
+// Cliente CRUD
+app.get('/cliente/:cpf', routes.clientes.getById);
+app.get('/cliente', routes.clientes.get);
+app.post('/cliente', routes.clientes.add);
+app.put('/cliente/:cpf', routes.clientes.update);
+app.delete('/cliente/:cpf', routes.clientes.delete);
 
 app.listen(3000, function () {
   console.log('The service is on port 3000!');

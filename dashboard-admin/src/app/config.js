@@ -20,13 +20,6 @@ angular
             url: "/usuario",
             templateUrl: "components/common/content.html"
         })
-        .state('usuario.cliente', {
-            url: "/cliente",
-            controller: clienteCtrl,
-            controllerAs: "vm",
-            templateUrl: "app/pages/cliente/cliente.html",
-            data: { pageTitle: 'Cliente' }
-        })
         .state('usuario.administrador', {
             url: "/administrador",
             controller: administradorCtrl,
@@ -45,6 +38,13 @@ angular
             controllerAs: "vm",
             templateUrl: "app/pages/produto/produto-add.html",
             data: { pageTitle: 'Add new Produto' }
+        })
+        .state('index.cliente-add', {
+            url: "/cliente-add",
+            controller: clienteAddCtrl,
+            controllerAs: "vm",
+            templateUrl: "app/pages/cliente/cliente-add.html",
+            data: { pageTitle: 'Add new Cliente' }
         })
         ;
 
