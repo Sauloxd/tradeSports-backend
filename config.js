@@ -1,4 +1,6 @@
 var database         = 'tradesportsdb';
 var connectionString = process.env.DATABASE_URL || ('postgres://localhost:5432/' + database);
+var secret = "superSecret"
 
-module.exports = connectionString;
+exports.connectionString = connectionString;
+exports.secret = secret;
