@@ -13,5 +13,6 @@ Backend for TradeSports, the best shoe-commerce on the market!
 $ git clone https://github.com/Sauloxd/tradeSports-backend.git
 $ cd tradeSports-backend
 $ npm i
+$ ./init.sh
 $ node app.js
 ```
