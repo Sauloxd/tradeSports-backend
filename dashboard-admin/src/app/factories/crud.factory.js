@@ -21,6 +21,13 @@ var crudService = function ($http, $q) {
       .get("http://localhost:3000/" + table)
   }
 
+  crud.getById = function(table, searchId) { 
+    console.log('searching: ', searchId)
+    console.log('in ', table)
+    return $http
+      .get("http://localhost:3000/" + table, searchId)
+  }
+
   return crud;
 
 };

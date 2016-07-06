@@ -16,12 +16,12 @@ var administradorAddCtrl = function (crudService) {
 
   vm.submitForm = function(){
     crudService.post('administrador', vm.formData)
-      .then(function(){
-        console.log('Success!');
-        location.href = "#/usuario/administrador"
-      }, function(err){
-        console.log('err', err);
-      });
+    .then(function(){
+      console.log('Success!');
+      location.href = "#/usuario/administrador"
+    }, function(err){
+      console.log('err', err);
+    });
   };
 
 }
