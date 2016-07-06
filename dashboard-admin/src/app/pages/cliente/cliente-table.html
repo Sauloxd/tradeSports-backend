@@ -19,6 +19,7 @@
                     <th>Login</th>
                     <th>Telefone</th>
                     <th>E-mail</th>
+                    <th>Opções</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -28,12 +29,13 @@
                         <td>{{client.login}}</td>
                         <td>{{client.telefone}}</td>
                         <td>{{client.email}}</td>
+                        <td><i class="fa fa-times" aria-hidden="true" />&nbsp;&nbsp;<i class="fa fa-pencil" aria-hidden="true" /></td>
                         </tr>
                 </tbody>
             </table>
             <div class="hr-line-dashed"></div>
-            <div class="col-sm-4 col-sm-offset-2">
-                <button class="btn btn-white" type="submit" ng-click="vm.goToAddClient()">Adicionar</button>
+            <div style="float: right;">
+                <button class="btn btn-primary" type="submit" ng-click="vm.goToAddClient()">Criar</button>
             </div> 
         </div>
     </div> 

@@ -5,6 +5,10 @@ var administradorCtrl = function (crudService) {
 	  location.href = "#/usuario/addAdministrador"
 	}
 
+	vm.searchAdminByCPF = function() {
+		
+	}
+
 	vm.administradores = []
 
 	crudService.get('administrador')
