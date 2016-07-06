@@ -6,7 +6,7 @@ var client = new pg.Client(connectionString);
 client.connect();
 
 var query = client.query(
-  'CREATE TABLE Cliente('            		    +
+  'CREATE TABLE IF NOT EXISTS Cliente('            		    +
     'cpf numeric(11) PRIMARY KEY,' 			    +
     'nome varchar(255) not null,' 			    +
     'login varchar(255) unique not null,'  	+
