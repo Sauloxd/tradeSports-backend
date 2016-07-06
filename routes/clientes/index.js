@@ -18,7 +18,7 @@ clientes.get = function(req, res) {
     }
 
     // SQL Query > Select Data
-    var query = client.query("SELECT * FROM Cliente;");
+    var query = client.query("SELECT cpf, nome, login, telefone, email FROM Cliente;");
 
     // Stream results back one row at a time
     query.on('row', function(row) {
@@ -51,7 +51,7 @@ clientes.getById = function(req, res) {
     }
 
     // SQL Query > Select Data
-    var query = client.query("SELECT * FROM Cliente WHERE cpf="+ _id +";");
+    var query = client.query("SELECT cpf, nome, login, telefone, email FROM Cliente WHERE cpf="+ _id +";");
 
     // Stream results back one row at a time
     query.on('row', function(row) {

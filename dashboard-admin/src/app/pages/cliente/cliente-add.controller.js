@@ -3,10 +3,10 @@ var clienteAddCtrl = function (crudService) {
   vm.formData = {};
 
   vm.fillForm = function(){
-    vm.formData.nome = "Teste Teste";
-    vm.formData.login = "loginteste";
+    vm.formData.nome = "Cliente Teste";
+    vm.formData.login = "clienteteste";
     vm.formData.senha = "senhateste";
-    vm.formData.email = "teste@teste.com";
+    vm.formData.email = "cliente@teste.com";
     vm.formData.cpf = 12345678900;
     vm.formData.telefone = 11999999999;
   }
@@ -19,6 +19,7 @@ var clienteAddCtrl = function (crudService) {
     crudService.post('cliente', vm.formData)
       .then(function(){
         console.log('Success!');
+        location.href = "#/usuario/cliente"
       }, function(err){
         console.log('err', err);
       });
