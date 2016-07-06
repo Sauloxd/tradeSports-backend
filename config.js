@@ -1,6 +1,6 @@
-var database         = 'tradesportsdb';
-var connectionString = process.env.DATABASE_URL || ('postgres://localhost:5432/' + database);
-var secret = "superSecret"
+var config = {};
 
-exports.connectionString = connectionString;
-exports.secret = secret;
+config.connectionString = process.env.DATABASE_URL || ('postgres://localhost:5432/tradesportsdb');
+config.secret = "superSecret";
+
+module.exports = config;

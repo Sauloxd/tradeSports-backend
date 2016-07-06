@@ -1,10 +1,11 @@
 var path = require('path');
 var pg = require('pg');
 var jwt    = require('jsonwebtoken');
+var config = require(path.join(__dirname, '../', '../', 'config'))
 
-var connectionString = require(path.join(__dirname, '../', '../', 'config'));
+var auth = {};
 
-var auth = function(req, res){
+auth.authenticate = function(req, res) {
   console.log('Auth was called!');
 
   var results = [];
@@ -15,7 +16,7 @@ var auth = function(req, res){
   };
 
   console.log('this are the creds', credential);
-  pg.connect(connectionString, function(err, client, done) {
+  pg.connect(config.connectionString, function(err, client, done) {
     // Handle connection errors
     if(err) {
       done();
@@ -23,78 +24,60 @@ var auth = function(req, res){
       return res.status(500).json({ success: false, data: err});
     }
 
-    // SQL Query > Select Data
     var query = client.query("SELECT login, senha FROM Administrador WHERE login= \'" + credential.login + "\' and senha=\'" + credential.senha + "\';");
 
-    // Stream results back one row at a time
     query.on('row', function(row) {
         results.push(row);
     });
 
-    // After all data is returned, close connection and return results
     query.on('end', function() {
+      done();
       if(!results.length) {
-        done();
-        console.log(err);
-        return res.status(500).json({ success: false, data: err});
+        return res.status(403).json({ success: false, message: 'Authentication FAILED! :('});
       } else {
-        // if user is found and password is right
-        // create a token
-        var token = jwt.sign(credential, 'saulofuruta', {
-          expiresIn : 60*60*24 // expires in 24 hours
+        var token = jwt.sign(credential, config.secret, {
+          expiresIn : 60*60*24 // 24h
         });
 
-        done();
-
-        // return the information including token as JSON
         return res.json({
           success: true,
-          message: 'Enjoy your token!',
+          message: 'Token Created!',
           token: token
         });
       }
     });
 
   });
-  //
-  // // Get a Postgres client from the connection pool
-  // pg.connect(connectionString, function(err, client, done) {
-  //   // Handle connection errors
-  //   if(err) {
-  //     done();
-  //     console.log(err);
-  //     return res.status(500).json({ success: false, data: err});
-  //   }
-  //
-  //   // SQL Query > Insert Data
-  //   client.query('INSERT INTO Produto(' +
-  //     'valor,'                          +
-  //     'nome,'                           +
-  //     'imagem,'                         +
-  //     'descrição,'                      +
-  //     'peso,'                           +
-  //     'tamanho,'                        +
-  //     'fabricante,'                     +
-  //     'quantidade,'                     +
-  //     'tipo'                            +
-  //   ') values($1, $2, $3, $4, $5, $6, $7, $8, $9)', [data.Valor, data.Nome, data.Imagem, data.Descrição, data.Peso, data.Tamanho, data.Fabricante, data.Quantidade, data.Tipo]);
-  //
-  //   // SQL Query > Select Data
-  //   var query = client.query("SELECT * FROM Produto ORDER BY idProduto DESC LIMIT 1");
-  //
-  //   // Stream results back one row at a time
-  //   query.on('row', function(row) {
-  //     results.push(row);
-  //   });
-  //
-  //   // After all data is returned, close connection and return results
-  //   query.on('end', function() {
-  //     done();
-  //     return res.json(results);
-  //   });
-  //
-  //
-  // });
+
 }
+
+auth.middleware = function(req, res, next) {
+
+  // check header or url parameters or post parameters for token
+  var token = req.body.token || req.query.token || req.headers['x-access-token'];
+
+  // decode token
+  if (token) {
+    // verifies secret and checks exp
+    jwt.verify(token, config.secret, function(err, decoded) {
+      if (err) {
+        return res.json({ success: false, message: 'Failed to authenticate token.' });
+      } else {
+        // if everything is good, save to request for use in other routes
+        req.decoded = decoded;
+        next();
+      }
+    });
+
+  } else {
+    // if there is no token
+    // return an error
+    return res.status(403).send({
+        success: false,
+        message: 'No token provided.'
+    });
+
+  }
+};
 
 module.exports = auth;
