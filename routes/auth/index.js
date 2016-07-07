@@ -57,9 +57,11 @@ auth.middleware = function(req, res, next) {
   console.log('passou pelo api/auth!');
   if ( _.contains(nonSecurePaths, req.path) ) return next();
 
-  console.log('passou pelo middleware!!');
+  console.log('req.body.token: => ', req.body.token);
+  console.log('req.query.token: => ', req.query.token);
+  console.log('req.headers["x-access-token"]: => ', req.headers['x-access-token']);
   // check header or url parameters or post parameters for token
-  var token = req.body.token || req.query.token || req.headers['x-access-token'];
+  var token = req.body.token || req.query.token || req.headers['authorization'];
 
   // decode token
   if (token) {
