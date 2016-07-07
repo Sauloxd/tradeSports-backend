@@ -29,14 +29,14 @@
                         <td>{{client.login}}</td>
                         <td>{{client.telefone}}</td>
                         <td>{{client.email}}</td>
-                        <td><i class="fa fa-times" aria-hidden="true" />&nbsp;&nbsp;<i class="fa fa-pencil" aria-hidden="true" /></td>
+                        <td><a ng-click="vm.delete(client.cpf)"><i class="fa fa-times" aria-hidden="true" /></a>&nbsp;&nbsp;<a ui-sref='usuario.cliente-update({cpf: client.cpf})'><i class="fa fa-pencil" aria-hidden="true" /></a></td>
                         </tr>
                 </tbody>
             </table>
             <div class="hr-line-dashed"></div>
             <div style="float: right;">
                 <button class="btn btn-primary" type="submit" ng-click="vm.goToAddClient()">Criar</button>
-            </div> 
+            </div>
         </div>
-    </div> 
+    </div>
 </div>

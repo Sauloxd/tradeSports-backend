@@ -27,6 +27,12 @@ clientes.get = function(req, res) {
 
     // After all data is returned, close connection and return results
     query.on('end', function() {
+      results = results.map(function(obj){
+         var rObj = obj;
+         rObj['cpf'] = parseInt(obj.cpf);
+         return rObj;
+      });
+      console.log(results);
       done();
       return res.json(results);
     });
@@ -60,6 +66,13 @@ clientes.getById = function(req, res) {
 
     // After all data is returned, close connection and return results
     query.on('end', function() {
+      results = results.map(function(obj){
+         var rObj = obj;
+         rObj['cpf'] = parseInt(obj.cpf);
+         rObj['telefone'] = parseInt(obj.telefone);
+
+         return rObj;
+      });
       done();
       return res.json(results);
     });
@@ -81,6 +94,8 @@ clientes.add = function(req, res) {
     Telefone: req.body.telefone,
     Email: req.body.email
   };
+
+  console.log(data);
 
   // Get a Postgres client from the connection pool
   pg.connect(connectionString, function(err, client, done) {
@@ -126,6 +141,7 @@ clientes.update = function(req, res) {
 
   // Grab data from the URL parameters
   var id = req.params.cpf;
+  console.log('id is: ', id);
 
   // Grab data from http request
   var data = {
@@ -146,7 +162,7 @@ clientes.update = function(req, res) {
     }
 
     // SQL Query > Update Data
-    client.query("UPDATE Produto SET nome=($1), login=($2), senha=($3), telefone=($4), email=($5) WHERE cpf=($5)", [data.Nome, data.Login, data.Senha, data.Telefone, data.Email, id]);
+    client.query("UPDATE Cliente SET nome=($1), login=($2), senha=($3), telefone=($4), email=($5) WHERE cpf=($6)", [data.Nome, data.Login, data.Senha, data.Telefone, data.Email, id]);
 
     // SQL Query > Select Data
     var query = client.query("SELECT * FROM Cliente");

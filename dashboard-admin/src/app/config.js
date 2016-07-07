@@ -22,6 +22,13 @@ angular
             templateUrl: "app/pages/cliente/cliente-table.html",
             data: { pageTitle: 'Cliente' }
         })
+        .state('usuario.cliente-update', {
+            url: "/cliente/:cpf",
+            controller: clienteUpdateCtrl,
+            controllerAs: "vm",
+            templateUrl: "app/pages/cliente/cliente-update.html",
+            data: { pageTitle: 'Atualizar Cliente' }
+        })
         .state('usuario.cliente-add', {
             url: "/addCliente",
             controller: clienteAddCtrl,
