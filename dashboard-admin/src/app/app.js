@@ -14,7 +14,7 @@ angular
   ])
   .run(function ($rootScope, $http, $state, $localStorage) {
       console.log('run foi chamado!');
-        // keep user logged in after page refresh
+        //keep user logged in after page refresh
         if ($localStorage.currentUser) {
             console.log('existe current user!');
             $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.currentUser.token;

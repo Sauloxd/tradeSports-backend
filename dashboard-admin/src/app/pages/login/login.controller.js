@@ -9,6 +9,7 @@ var loginCtrl = function (AuthenticationService, $localStorage, $state) {
           // $location.path('/');
           console.log('Success!');
           console.log($localStorage.currentUser);
+          $state.go('produto.add');
       } else {
           vm.error = '';
           console.log('Username or password is incorrect');
