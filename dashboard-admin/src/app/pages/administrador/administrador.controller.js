@@ -15,8 +15,8 @@ var administradorCtrl = function (crudService) {
 	.then(function(response){
 	  console.log('Success');
 	  vm.administradores = response.data;
-	},function(response){
-	  vm.administradores =  $q.reject(response.data);
+	}, function(err) {
+		console.log('error', err);
 	});
 }
 

@@ -8,12 +8,12 @@ var clienteCtrl = function (crudService) {
   vm.clientes = []
 
   crudService.get('cliente')
-	.then(function(response){
+	  .then(function(response){
       console.log('Success');
       vm.clientes = response.data;
-    },function(response){
-      vm.clientes =  $q.reject(response.data);
-  });
+    }, function(err) {
+      console.log('error', err);
+    });
 }
 
 angular

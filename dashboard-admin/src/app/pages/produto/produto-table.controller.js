@@ -11,9 +11,9 @@ var produtoCtrl = function (crudService) {
   .then(function(response){
       console.log('Success');
       vm.produtos = response.data;
-    },function(response){
-      vm.produtos =  $q.reject(response.data);
-  });
+    }, function(err) {
+      console.log('error', err);
+    });
 }
 
 angular
