@@ -68,6 +68,9 @@ angular
 
         ;
 
-    $urlRouterProvider.otherwise('produto/table');
+    $urlRouterProvider.otherwise('login');
 
-  });
+  })
+  .run(function($rootScope, $state) {
+        $rootScope.$state = $state;
+    });

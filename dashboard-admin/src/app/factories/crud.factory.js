@@ -6,7 +6,7 @@ var crudService = function ($http, $q) {
     console.log('inserting: ', formData);
     console.log('into ', table);
     return $http
-      .post("http://localhost:3000/" + table, formData)
+      .post("http://localhost:3000/" + table + "/" + formData)
       .then(function(response){
         console.log('Success');
         return;
@@ -21,11 +21,11 @@ var crudService = function ($http, $q) {
       .get("http://localhost:3000/" + table)
   }
 
-  crud.getById = function(table, searchId) { 
+  crud.getById = function(table, searchId) {
     console.log('searching: ', searchId)
     console.log('in ', table)
     return $http
-      .get("http://localhost:3000/" + table, searchId)
+      .get("http://localhost:3000/" + table + "/" + searchId)
   }
 
   return crud;

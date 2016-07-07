@@ -1,18 +1,23 @@
-var express = require('express');
-var routes = require('./routes');
-var bodyParser = require('body-parser');
+var express     = require('express');
+var routes      = require('./routes');
+var bodyParser  = require('body-parser');
+var morgan      = require('morgan');
+var cors        = require('cors');
 var app = express();
+
 
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 app.use(express.static('dashboard-admin/dist'));
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+app.use(cors());
+
+app.use(morgan('dev'));
+//Authentication
+//Check for JWT in every of the below routes
+app.use(routes.auth.middleware);
+app.post('/api/auth', routes.auth.authenticate);
 
 // Produto CRUD
 app.get('/produto/:idProduto', routes.produtos.getById);
@@ -27,7 +32,6 @@ app.get('/administrador', routes.administradores.get);
 app.post('/administrador', routes.administradores.add);
 app.put('/administrador/:cpf', routes.administradores.update);
 app.delete('/administrador/:cpf', routes.administradores.delete);
-
 
 // Cliente CRUD
 app.get('/cliente/:cpf', routes.clientes.getById);

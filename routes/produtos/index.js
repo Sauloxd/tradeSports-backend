@@ -1,6 +1,6 @@
 var path = require('path');
 var pg = require('pg');
-var connectionString = require(path.join(__dirname, '../', '../', 'config'));
+var connectionString = require(path.join(__dirname, '../', '../', 'config')).connectionString;
 
 var produtos = {};
 

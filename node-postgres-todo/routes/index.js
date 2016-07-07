@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var path = require('path');
 var pg = require('pg');
-var connectionString = require(path.join(__dirname, '../', 'config'));
+var connectionString = require(path.join(__dirname, '../', 'config')).connectionString;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
