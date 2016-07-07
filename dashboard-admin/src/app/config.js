@@ -52,11 +52,13 @@ angular
 
         .state('produto.table', {
             url: "/table",
+            controller: produtoCtrl,
+            controllerAs: "vm",
             templateUrl: "app/pages/produto/produto-table.html",
             data: { pageTitle: 'Produto' }
         })
         .state('produto.add', {
-            url: "/add",
+            url: "/addProduct",
             controller: produtoAddCtrl,
             controllerAs: "vm",
             templateUrl: "app/pages/produto/produto-add.html",
