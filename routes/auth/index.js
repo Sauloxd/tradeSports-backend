@@ -52,7 +52,12 @@ auth.authenticate = function(req, res) {
 }
 
 auth.middleware = function(req, res, next) {
+  var _ = require('underscore')
+    , nonSecurePaths = ['/api/auth'];
+  console.log('passou pelo api/auth!');
+  if ( _.contains(nonSecurePaths, req.path) ) return next();
 
+  console.log('passou pelo middleware!!');
   // check header or url parameters or post parameters for token
   var token = req.body.token || req.query.token || req.headers['x-access-token'];
 

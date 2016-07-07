@@ -13,14 +13,15 @@ app.use(express.static('dashboard-admin/dist'));
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
   next();
 });
 
 app.use(morgan('dev'));
 //Authentication
-app.post('/auth', routes.auth.authenticate);
 //Check for JWT in every of the below routes
 app.use(routes.auth.middleware);
+app.post('/api/auth', routes.auth.authenticate);
 
 // Produto CRUD
 app.get('/produto/:idProduto', routes.produtos.getById);
