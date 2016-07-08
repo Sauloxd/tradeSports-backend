@@ -15,7 +15,7 @@ var app = express();
 
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
-app.use(express.static('dashboard-admin/dist'));
+app.use(express.static('dashboard-admin'));
 app.use(cors());
 app.use(morgan('dev'));
 
@@ -43,7 +43,7 @@ _.forEach(appRoutes, function(route){
 //For async loop in _
 function cb(route) {
     return function(next) {
-        app[route.method](route.path, route.callback);
+        app[route.method]('/api' + route.path, route.callback);
         next();
     }
 }

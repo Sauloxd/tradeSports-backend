@@ -3,10 +3,8 @@ var crudService = function ($http, $q) {
   var crud = {}
 
   crud.post = function(table, formData){
-    console.log('inserting: ', formData);
-    console.log('into ', table);
     return $http
-      .post("http://localhost:3000/" + table, formData)
+      .post("http://localhost:3000/api/" + table, formData)
       .then(function(response){
         console.log('Success');
         return;
@@ -16,23 +14,18 @@ var crudService = function ($http, $q) {
   }
 
   crud.get = function(table){
-    console.log('getting ', table);
     return $http
-      .get("http://localhost:3000/" + table)
+      .get("http://localhost:3000/api/" + table)
   }
 
   crud.getById = function(table, searchId) {
-    console.log('searching: ', searchId)
-    console.log('in ', table)
     return $http
-      .get("http://localhost:3000/" + table + "/" + searchId)
+      .get("http://localhost:3000/api/" + table + "/" + searchId)
   }
 
   crud.delete = function(table, id){
-    console.log('deleting the id : ', id);
-    console.log('from ', table);
     return $http
-      .delete("http://localhost:3000/" + table + "/" + id)
+      .delete("http://localhost:3000/api/" + table + "/" + id)
       .then(function(response){
         console.log('Success');
         return;
@@ -42,10 +35,8 @@ var crudService = function ($http, $q) {
   }
 
   crud.update = function(table, id, formData){
-    console.log('inserting: ', formData);
-    console.log('into ', table);
     return $http
-      .put("http://localhost:3000/" + table + "/" + id, formData)
+      .put("http://localhost:3000/api/" + table + "/" + id, formData)
       .then(function(response){
         console.log('Success');
         return;
@@ -53,7 +44,7 @@ var crudService = function ($http, $q) {
           return $q.reject(response.data);
     });
   }
-
+  
   return crud;
 
 };

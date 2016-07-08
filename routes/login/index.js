@@ -1,5 +1,5 @@
 module.exports = {
-  path: '/api/login',
+  path: '/login',
   method: 'post',
   callback: require('./login')
 };

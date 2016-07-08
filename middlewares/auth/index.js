@@ -2,12 +2,13 @@ var path = require('path');
 var pg = require('pg');
 var jwt    = require('jsonwebtoken');
 var config = require(path.join(__dirname, '../', '../', 'config'))
+var _ = require('underscore')
+var nonSecurePaths = require('./nonSecurePaths');
+
 
 module.exports = function(req, res, next) {
-  //TODO: import this nonSecurePaths from somewhere else!
-  var _ = require('underscore')
-    , nonSecurePaths = ['/api/login'];
-  console.log('passou pelo api/login!');
+
+  //If the path is non Secure, continue. No Validation needed
   if ( _.contains(nonSecurePaths, req.path) ) return next();
 
   // check header or url parameters or post parameters for token
