@@ -1,12 +1,9 @@
 var path = require('path');
 var pg = require('pg');
 var jwt    = require('jsonwebtoken');
-var config = require(path.join(__dirname, '../', '../', 'config'))
+var config = require(path.join(__dirname, '../', '../', 'config'));
 
-var auth = {};
-
-auth.authenticate = function(req, res) {
-  console.log('Auth was called!');
+module.exports = function (req, res) {
 
   var results = [];
   // Grab data from http request
@@ -49,39 +46,4 @@ auth.authenticate = function(req, res) {
 
   });
 
-}
-
-auth.middleware = function(req, res, next) {
-  var _ = require('underscore')
-    , nonSecurePaths = ['/api/auth'];
-  console.log('passou pelo api/auth!');
-  if ( _.contains(nonSecurePaths, req.path) ) return next();
-
-  // check header or url parameters or post parameters for token
-  var token = req.body.token || req.query.token || req.headers['authorization'];
-
-  // decode token
-  if (token) {
-    // verifies secret and checks exp
-    jwt.verify(token, config.secret, function(err, decoded) {
-      if (err) {
-        return res.json({ success: false, message: 'Failed to authenticate token.' });
-      } else {
-        // if everything is good, save to request for use in other routes
-        req.decoded = decoded;
-        next();
-      }
-    });
-
-  } else {
-    // if there is no token
-    // return an error
-    return res.status(403).send({
-        success: false,
-        message: 'No token provided.'
-    });
-
-  }
 };
-
-module.exports = auth;
