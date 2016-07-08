@@ -1,13 +1,20 @@
-var clienteAddCtrl = function (crudService, $state) {
+var clienteUpdateCtrl = function (crudService, $state, $stateParams) {
   var vm = this;
-  vm.formData = {};
+
+  crudService.getById('cliente', $stateParams.cpf)
+    .then(function(response){
+      console.log('Success');
+      vm.formData = response.data[0];
+      vm.formData.senha = "password";
+    }, function(err) {
+      console.log('error', err);
+    });
 
   vm.fillForm = function(){
     vm.formData.nome = "Cliente Teste";
     vm.formData.login = "clienteteste";
     vm.formData.senha = "senhateste";
     vm.formData.email = "cliente@teste.com";
-    vm.formData.cpf = 12345678900;
     vm.formData.telefone = 11999999999;
   }
 
@@ -16,7 +23,9 @@ var clienteAddCtrl = function (crudService, $state) {
   };
 
   vm.submitForm = function(){
-    crudService.post('cliente', vm.formData)
+    delete vm.formData.cpf;
+    console.log(vm.formData);
+    crudService.update('cliente', $stateParams.cpf, vm.formData)
       .then(function(){
         console.log('Success!');
         $state.go('usuario.cliente');
@@ -32,4 +41,4 @@ var clienteAddCtrl = function (crudService, $state) {
 
 angular
   .module('app')
-  .controller('clienteAddCtrl', clienteAddCtrl);
+  .controller('clienteUpdateCtrl', clienteUpdateCtrl);
