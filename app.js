@@ -15,16 +15,17 @@ var app = express();
 
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
-
 app.use(express.static('dashboard-admin/dist'));
-
 app.use(cors());
-
 app.use(morgan('dev'));
+
+
 //Authentication
 //Check for JWT in every of the below routes
 app.use(auth);
 
+
+//Adding routes
 var appRoutes = [];
 var actions = [];
 
@@ -39,6 +40,7 @@ _.forEach(appRoutes, function(route){
   actions.push(cb(route));
 });
 
+//For async loop in _
 function cb(route) {
     return function(next) {
         app[route.method](route.path, route.callback);
@@ -47,13 +49,6 @@ function cb(route) {
 }
 
 _(actions).reduceRight(_.wrap, function() { console.warn('Finished Adding routes!') })();
-
-// // Cliente CRUD
-// app.get('/cliente/:cpf', routes.clientes.getById);
-// app.get('/cliente', routes.clientes.get);
-// app.post('/cliente', routes.clientes.add);
-// app.put('/cliente/:cpf', routes.clientes.update);
-// app.delete('/cliente/:cpf', routes.clientes.delete);
 
 app.listen(3000, function () {
   console.log('The service is on port 3000!');
