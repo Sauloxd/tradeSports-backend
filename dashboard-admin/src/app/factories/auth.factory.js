@@ -3,7 +3,7 @@ var AuthenticationService = function($http, $localStorage, $state) {
 
   var login = function(login, senha, callback) {
     console.log('login called');
-    $http.post('http://localhost:3000/api/auth', { login: login, senha: senha })
+    $http.post('http://localhost:3000/api/login', { login: login, senha: senha })
       .success(function (response) {
         // login successful if there's a token in the response
         if (response.token) {
