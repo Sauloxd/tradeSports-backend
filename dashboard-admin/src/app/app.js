@@ -13,18 +13,14 @@ angular
     'ngStorage'
   ])
   .run(function ($rootScope, $http, $state, $localStorage) {
-      console.log('run foi chamado!');
         //keep user logged in after page refresh
         if ($localStorage.currentUser) {
-            console.log('existe current user!');
             $http.defaults.headers.common.Authorization = $localStorage.currentUser.token;
         }
 
         // redirect to login page if not logged in and trying to access a restricted page
         $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
             var publicStatePages = ['login'];
-            console.log('going to state : => ', toState);
-            console.log('currentUSer => ', $localStorage.currentUser);
             var restrictedPage = publicStatePages.indexOf(toState.name) === -1;
             if (restrictedPage && !$localStorage.currentUser) {
               e.preventDefault();
@@ -36,3 +32,17 @@ angular
             }
         });
     });
+
+
+
+(function(root) {
+
+  var backendPort  = "3000";
+  var hostname = "localhost";
+
+  root.TSConfig = {};
+  root.TSConfig.urlBase = "http://" + hostname + ":" + backendPort + "/api/";
+
+  console.log("Backend Located @ ", root.TSConfig.urlBase);
+
+})(this);

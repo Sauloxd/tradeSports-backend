@@ -4,9 +4,8 @@ var crudService = function ($http, $q) {
 
   crud.post = function(table, formData){
     return $http
-      .post("http://localhost:3000/api/" + table, formData)
+      .post(TSConfig.urlBase + table, formData)
       .then(function(response){
-        console.log('Success');
         return;
       },function(response){
           return $q.reject(response.data);
@@ -15,19 +14,18 @@ var crudService = function ($http, $q) {
 
   crud.get = function(table){
     return $http
-      .get("http://localhost:3000/api/" + table)
+      .get(TSConfig.urlBase + table)
   }
 
   crud.getById = function(table, searchId) {
     return $http
-      .get("http://localhost:3000/api/" + table + "/" + searchId)
+      .get(TSConfig.urlBase + table + "/" + searchId)
   }
 
   crud.delete = function(table, id){
     return $http
-      .delete("http://localhost:3000/api/" + table + "/" + id)
+      .delete(TSConfig.urlBase + table + "/" + id)
       .then(function(response){
-        console.log('Success');
         return;
       },function(response){
             return $q.reject(response.data);
@@ -36,15 +34,14 @@ var crudService = function ($http, $q) {
 
   crud.update = function(table, id, formData){
     return $http
-      .put("http://localhost:3000/api/" + table + "/" + id, formData)
+      .put(TSConfig.urlBase + table + "/" + id, formData)
       .then(function(response){
-        console.log('Success');
         return;
       },function(response){
           return $q.reject(response.data);
     });
   }
-  
+
   return crud;
 
 };
