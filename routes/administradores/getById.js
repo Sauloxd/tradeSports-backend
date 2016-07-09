@@ -27,6 +27,11 @@ module.exports = function(req, res) {
 
     // After all data is returned, close connection and return results
     query.on('end', function() {
+      results = results.map(function(obj){
+         var rObj = obj;
+         rObj['cpf'] = parseInt(obj.cpf);
+         return rObj;
+      });
       done();
       return res.json(results);
     });

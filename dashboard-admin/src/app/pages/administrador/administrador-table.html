@@ -27,14 +27,22 @@
                         <td>{{admin.nome}}</td>
                         <td>{{admin.login}}</td>
                         <td>{{admin.email}}</td>
-                        <td><i class="fa fa-times" aria-hidden="true" />&nbsp;&nbsp;<i class="fa fa-pencil" aria-hidden="true" /></td>
+                        <td>
+                          <a ng-click="vm.delete(admin.cpf)">
+                            <i class="fa fa-times" aria-hidden="true" />
+                          </a>
+                          &nbsp;&nbsp;
+                          <a ui-sref='usuario.administrador-update({cpf: admin.cpf})'>
+                            <i class="fa fa-pencil" aria-hidden="true" />
+                          </a>
+                        </td>
                         </tr>
                 </tbody>
             </table>
             <div class="hr-line-dashed"></div>
             <div style="float: right;">
                 <button class="btn btn-white" type="submit" ng-click="vm.goToAddAdmin()">Criar</button>
-            </div> 
+            </div>
         </div>
-    </div> 
+    </div>
 </div>

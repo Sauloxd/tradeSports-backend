@@ -1,4 +1,4 @@
-var clienteUpdateCtrl = function (crudService, $state, $stateParams) {
+var adminsitradorUpdateCtrl = function (crudService, $state, $stateParams) {
   var vm = this;
 
   vm.formData = {};
@@ -41,17 +41,10 @@ var clienteUpdateCtrl = function (crudService, $state, $stateParams) {
     max: "99999999999",
     isRequired: true,
     isDisabled: true
-  },
-  {
-    name: 'Telefone',
-    type: 'number',
-    model: '',
-    min: "0",
-    max: "999999999999999",
-    isRequired: true
   }]
 
-  crudService.getById('cliente', $stateParams.cpf)
+
+  crudService.getById('administrador', $stateParams.cpf)
     .then(function(response){
       console.log('Success');
       vm.formData = response.data[0];
@@ -70,10 +63,10 @@ var clienteUpdateCtrl = function (crudService, $state, $stateParams) {
       vm.formData[curr.name.toLowerCase()] = curr.model;
     });
     console.log(vm.formData);
-    crudService.update('cliente', $stateParams.cpf, vm.formData)
+    crudService.update('administrador', $stateParams.cpf, vm.formData)
       .then(function(){
         console.log('Success!');
-        $state.go('usuario.cliente');
+        $state.go('usuario.administrador');
       }, function(err){
         console.log('err', err);
       });
@@ -88,4 +81,4 @@ var clienteUpdateCtrl = function (crudService, $state, $stateParams) {
 
 angular
   .module('app')
-  .controller('clienteUpdateCtrl', clienteUpdateCtrl);
+  .controller('adminsitradorUpdateCtrl', adminsitradorUpdateCtrl);

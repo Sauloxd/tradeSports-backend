@@ -26,14 +26,14 @@ angular
             url: "/cliente/:cpf",
             controller: clienteUpdateCtrl,
             controllerAs: "vm",
-            templateUrl: "app/pages/cliente/cliente-update.html",
+            templateUrl: "components/form/usuario.html",
             data: { pageTitle: 'Atualizar Cliente' }
         })
         .state('usuario.cliente-add', {
             url: "/addCliente",
             controller: clienteAddCtrl,
             controllerAs: "vm",
-            templateUrl: "app/pages/cliente/cliente-add.html",
+            templateUrl: "components/form/usuario.html",
             data: { pageTitle: 'Add new Cliente' }
         })
         .state('usuario.administrador', {
@@ -47,10 +47,16 @@ angular
             url: "/addAdministrador",
             controller: administradorAddCtrl,
             controllerAs: "vm",
-            templateUrl: "app/pages/administrador/administrador-add.html",
+            templateUrl: "components/form/usuario.html",
             data: { pageTitle: 'Administrador' }
         })
-
+        .state('usuario.administrador-update', {
+            url: "/administrador/:cpf",
+            controller: adminsitradorUpdateCtrl,
+            controllerAs: "vm",
+            templateUrl: "components/form/usuario.html",
+            data: { pageTitle: 'Atualizar Administrador' }
+        })
         .state('produto', {
             abstract: true,
             url: "/produto",

@@ -15,8 +15,12 @@ var app = express();
 
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
-app.use(express.static('dashboard-admin'));
+
+
+// app.use(express.static('dashboard-admin'));
+
 app.use(cors());
+
 app.use(morgan('dev'));
 
 
@@ -34,7 +38,7 @@ _.forEach(routes, function(route){
   else appRoutes.push(route);
 });
 
-console.log(appRoutes);
+// console.log(appRoutes);
 
 _.forEach(appRoutes, function(route){
   actions.push(cb(route));

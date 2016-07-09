@@ -12,7 +12,6 @@ module.exports = function (req, res) {
     senha: req.body.senha
   };
 
-  console.log('this are the creds', credential);
   pg.connect(config.connectionString, function(err, client, done) {
     // Handle connection errors
     if(err) {

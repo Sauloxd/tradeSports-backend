@@ -36,11 +36,7 @@ var clienteCtrl = function (crudService, $state) {
       swal("Deletado!", "O cliente foi deletado!.", "success");
     });
   };
-
-  vm.update = function (cpf) {
-    $state.go('usuario.cliente-add', {"cpf": cpf});
-  };
-
+  
 }
 
 angular
