@@ -29,14 +29,15 @@ var clienteCtrl = function (crudService, $state) {
     }, function(){
       crudService.delete('cliente', cpf)
     	  .then(function(response){
+          getClientes();
+          swal("Deletado!", "O cliente foi deletado!.", "success");
         }, function(err) {
           console.log('error', err);
         });
-      getClientes();
-      swal("Deletado!", "O cliente foi deletado!.", "success");
+
     });
   };
-  
+
 }
 
 angular

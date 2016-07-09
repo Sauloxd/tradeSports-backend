@@ -13,8 +13,6 @@ var administradorCtrl = function (crudService, $state) {
     $state.go('usuario.administrador-add');
   }
 
-  vm.admin = [];
-
   get();
   vm.delete = function (cpf) {
     swal({
