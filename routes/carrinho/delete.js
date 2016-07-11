@@ -5,7 +5,9 @@ var connectionString = require(path.join(__dirname, '../', '../', 'config')).con
 module.exports = function(req, res) {
 
   var results = [];
-  var _id = req.params.cpf;
+
+  // Grab data from the URL parameters
+  var id = req.params.cpf;
 
 
   // Get a Postgres client from the connection pool
@@ -17,12 +19,15 @@ module.exports = function(req, res) {
       return res.status(500).json({ success: false, data: err});
     }
 
+    // SQL Query > Delete Data
+    client.query("DELETE FROM Carrinho WHERE cpf_cliente=($1)", [id]);
+
     // SQL Query > Select Data
-    var query = client.query("SELECT * FROM Carrinho WHERE cpf_cliente="+ _id +";");
+    var query = client.query("SELECT * FROM Carrinho");
 
     // Stream results back one row at a time
     query.on('row', function(row) {
-        results.push(row);
+      results.push(row);
     });
 
     // After all data is returned, close connection and return results
@@ -30,7 +35,6 @@ module.exports = function(req, res) {
       done();
       return res.json(results);
     });
-
   });
 
 }

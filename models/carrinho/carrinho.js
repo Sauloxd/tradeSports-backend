@@ -5,10 +5,11 @@ var connectionString = require(path.join(__dirname, '../../', 'config')).connect
 var client = new pg.Client(connectionString);
 client.connect();
 
-var query = carrinho.query(
+var query = client.query(
   'CREATE TABLE IF NOT EXISTS Carrinho('        				+
-    'cpf_cliente integer REFERENCES cliente (cpf),' 			+
-    'nome varchar(255) not null,' 			    				+
+    'cpf_cliente numeric(11) REFERENCES cliente (cpf),' 		+
+    'id_produto integer REFERENCES produto(idProduto),' 		+
+    'quantidade numeric(30) not null '	    					+
   ')'
 );
 
