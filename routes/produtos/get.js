@@ -25,6 +25,14 @@ module.exports = function(req, res) {
 
     // After all data is returned, close connection and return results
     query.on('end', function() {
+      results = results.map(function(obj){
+         var rObj = obj;
+         rObj['peso'] = parseInt(obj.peso);
+         rObj['valor'] = parseInt(obj.valor);
+         rObj['quantidade'] = parseInt(obj.quantidade);
+         return rObj;
+      });
+      console.log(results);
       done();
       return res.json(results);
     });

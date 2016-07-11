@@ -26,14 +26,14 @@ angular
             url: "/cliente/:cpf",
             controller: clienteUpdateCtrl,
             controllerAs: "vm",
-            templateUrl: "app/pages/cliente/cliente-update.html",
+            templateUrl: "components/form/form.html",
             data: { pageTitle: 'Atualizar Cliente' }
         })
         .state('usuario.cliente-add', {
             url: "/addCliente",
             controller: clienteAddCtrl,
             controllerAs: "vm",
-            templateUrl: "app/pages/cliente/cliente-add.html",
+            templateUrl: "components/form/form.html",
             data: { pageTitle: 'Add new Cliente' }
         })
         .state('usuario.administrador', {
@@ -47,10 +47,16 @@ angular
             url: "/addAdministrador",
             controller: administradorAddCtrl,
             controllerAs: "vm",
-            templateUrl: "app/pages/administrador/administrador-add.html",
+            templateUrl: "components/form/form.html",
             data: { pageTitle: 'Administrador' }
         })
-
+        .state('usuario.administrador-update', {
+            url: "/administrador/:cpf",
+            controller: adminsitradorUpdateCtrl,
+            controllerAs: "vm",
+            templateUrl: "components/form/form.html",
+            data: { pageTitle: 'Atualizar Administrador' }
+        })
         .state('produto', {
             abstract: true,
             url: "/produto",
@@ -68,11 +74,16 @@ angular
             url: "/addProduct",
             controller: produtoAddCtrl,
             controllerAs: "vm",
-            templateUrl: "app/pages/produto/produto-add.html",
+            templateUrl: "components/form/form.html",
             data: { pageTitle: 'Add new Produto' }
-
         })
-
+        .state('produto.update', {
+            url: "/putProduct/:idproduto",
+            controller: produtoUpdateCtrl,
+            controllerAs: "vm",
+            templateUrl: "components/form/form.html",
+            data: { pageTitle: 'Update Produto' }
+        })
         ;
 
     $urlRouterProvider.otherwise('login');

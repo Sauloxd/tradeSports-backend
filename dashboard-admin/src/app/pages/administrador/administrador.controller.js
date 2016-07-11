@@ -1,23 +1,40 @@
-var administradorCtrl = function (crudService) {
-	var vm = this;
+var administradorCtrl = function (crudService, $state) {
+  var vm = this;
 
-	vm.goToAddAdmin = function() {
-	  location.href = "#/usuario/addAdministrador"
-	}
+  var get = function () {
+    crudService.get('administrador')
+      .then(function(response){
+        vm.administradores = response.data;
+      }, function(err) {
+        console.log('error', err);
+      });
+  };
+  vm.goToAddAdmin = function() {
+    $state.go('usuario.administrador-add');
+  }
 
-	vm.searchAdminByCPF = function() {
-		
-	}
+  get();
+  vm.delete = function (cpf) {
+    swal({
+      title: "Você está certo disso?",
+      text: "O Administrador será deletado do banco de dados!",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#DD6B55",
+      confirmButtonText: "Sim, deletar!",
+      closeOnConfirm: false,
+      html: false
+    }, function(){
+      crudService.delete('administrador', cpf)
+    	  .then(function(response){
+					get();
+		      swal("Deletado!", "O Administrador foi deletado!.", "success");
+        }, function(err) {
+          console.log('error', err);
+        });
+    });
+  };
 
-	vm.administradores = []
-
-	crudService.get('administrador')
-	.then(function(response){
-	  console.log('Success');
-	  vm.administradores = response.data;
-	}, function(err) {
-		console.log('error', err);
-	});
 }
 
 angular

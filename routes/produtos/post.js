@@ -11,7 +11,7 @@ module.exports = function(req, res) {
     Valor: req.body.valor,
     Nome: req.body.nome,
     Imagem: req.body.imagem,
-    Descrição: req.body.descricao,
+    Descrição: req.body.descrição,
     Peso: req.body.peso,
     Tamanho: req.body.tamanho,
     Fabricante: req.body.fabricante,

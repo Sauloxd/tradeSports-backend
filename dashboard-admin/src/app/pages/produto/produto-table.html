@@ -21,18 +21,26 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="product in vm.produtos">
-                        <td>{{product.nome}}</td>
-                        <td>{{product.valor}}</td>
-                        <td>{{product.fabricante}}</td>
-                        <td><i class="fa fa-times" aria-hidden="true" />&nbsp;&nbsp;<i class="fa fa-pencil" aria-hidden="true" /></td>
+                    <tr ng-repeat="produto in vm.produtos">
+                        <td>{{produto.nome}}</td>
+                        <td>{{produto.valor}}</td>
+                        <td>{{produto.fabricante}}</td>
+                        <td>
+                          <a ng-click="vm.delete(produto.idproduto)">
+                            <i class="fa fa-times" aria-hidden="true" />
+                          </a>
+                          &nbsp;&nbsp;
+                          <a ui-sref='produto.update({idproduto: produto.idproduto})'>
+                            <i class="fa fa-pencil" aria-hidden="true" />
+                          </a>
+                        </td>
                         </tr>
                 </tbody>
             </table>
             <div class="hr-line-dashed"></div>
             <div style="float: right;">
                 <button class="btn btn-primary" type="submit" ng-click="vm.goToAddProduct()">Criar</button>
-            </div> 
+            </div>
         </div>
-    </div> 
+    </div>
 </div>

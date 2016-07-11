@@ -1,19 +1,41 @@
-var produtoCtrl = function (crudService) {
+var produtoCtrl = function (crudService, $state) {
   var vm = this;
+  var get = function () {
+    crudService.get('produto')
+      .then(function(response){
+        vm.produtos = response.data;
+      }, function(err) {
+        console.log('error', err);
+      });
+  };
+  get();
+
 
   vm.goToAddProduct = function() {
-    location.href = "#/produto/addProduct"
+    $state.go('produto.add');
   }
 
-  vm.produtos = []
-
-  crudService.get('produto')
-  .then(function(response){
-      console.log('Success');
-      vm.produtos = response.data;
-    }, function(err) {
-      console.log('error', err);
+  vm.delete = function (idProduto) {
+    swal({
+      title: "Você está certo disso?",
+      text: "O Produto será deletado do banco de dados!",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#DD6B55",
+      confirmButtonText: "Sim, deletar!",
+      closeOnConfirm: false,
+      html: false
+    }, function(){
+      crudService.delete('produto', idProduto)
+        .then(function(response){
+          get();
+          swal("Deletado!", "O Produto foi deletado!.", "success");
+        }, function(err) {
+          console.log('error', err);
+        });
     });
+  };
+
 }
 
 angular
