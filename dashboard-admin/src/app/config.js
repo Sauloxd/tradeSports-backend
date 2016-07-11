@@ -36,6 +36,27 @@ angular
             templateUrl: "components/form/form.html",
             data: { pageTitle: 'Add new Cliente' }
         })
+        .state('usuario.funcionario', {
+            url: "/funcionario",
+            controller: funcionarioCtrl,
+            controllerAs: "vm",
+            templateUrl: "app/pages/funcionario/funcionario-table.html",
+            data: { pageTitle: 'Funcionario' }
+        })
+        .state('usuario.funcionario-add', {
+            url: "/addFuncionario",
+            controller: funcionarioAddCtrl,
+            controllerAs: "vm",
+            templateUrl: "components/form/form.html",
+            data: { pageTitle: 'Funcionario' }
+        })
+        .state('usuario.funcionario-update', {
+            url: "/funcionario/:cpf",
+            controller: funcionarioUpdateCtrl,
+            controllerAs: "vm",
+            templateUrl: "components/form/form.html",
+            data: { pageTitle: 'Atualizar funcionario' }
+        })
         .state('usuario.administrador', {
             url: "/administrador",
             controller: administradorCtrl,
