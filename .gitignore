@@ -1,8 +1,8 @@
 **/*/.DS_STORE
-config.js
 **/*/node_modules
 node_modules
 
+credentials.js
 **/*/bower_components
 bower_components
 
