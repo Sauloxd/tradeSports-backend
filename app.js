@@ -19,7 +19,7 @@ app.use(cors());
 app.use(morgan('dev'));
 
 //Authentication
-app.use(auth);
+//app.use(auth);
 
 //Adding routes
 var appRoutes = [];
@@ -45,5 +45,5 @@ function cb(route) {
 _(actions).reduceRight(_.wrap, function() { console.warn('Finished Adding routes!') })();
 
 app.listen(3000, function () {
-  console.log('The magic happens on port 3000!');
+  console.log('The service is on port 3000!');
 });
