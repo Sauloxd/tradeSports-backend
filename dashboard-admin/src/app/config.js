@@ -83,7 +83,6 @@ angular
             url: "/produto",
             templateUrl: "components/common/content.html"
         })
-
         .state('produto.table', {
             url: "/table",
             controller: produtoCtrl,
