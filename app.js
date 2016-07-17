@@ -26,7 +26,7 @@ app.use(morgan('dev'));
 
 //Authentication
 //Check for JWT in every of the below routes
-app.use(auth);
+//app.use(auth);
 
 
 //Adding routes
