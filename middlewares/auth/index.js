@@ -9,7 +9,13 @@ var nonSecurePaths = require('./nonSecurePaths');
 module.exports = function(req, res, next) {
 
   //If the path is non Secure, continue. No Validation needed
-  if ( _.contains(nonSecurePaths, req.path) ) return next();
+
+  for(var i = 0; i < nonSecurePaths.length; i++){
+    if ( nonSecurePaths[i].path == req.path && nonSecurePaths[i].method == req.method) {
+      return next();
+    }
+  }
+
 
   // check header or url parameters or post parameters for token
   var token = req.body.token || req.query.token || req.headers['authorization'];

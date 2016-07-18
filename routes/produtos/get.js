@@ -32,7 +32,6 @@ module.exports = function(req, res) {
          rObj['quantidade'] = parseInt(obj.quantidade);
          return rObj;
       });
-      console.log(results);
       done();
       return res.json(results);
     });
