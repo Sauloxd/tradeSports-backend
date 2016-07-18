@@ -6,11 +6,11 @@ var client = new pg.Client(connectionString);
 client.connect();
 
 var query = client.query(
-  'CREATE TABLE IF NOT EXISTS Carrinho('        				+
+  'CREATE TABLE IF NOT EXISTS Carrinho('        				    +
     'cpf_cliente numeric(11) REFERENCES cliente (cpf),' 		+
     'id_produto integer REFERENCES produto(idProduto),' 		+
-    'quantidade numeric(30) not null, '	    					+
-    'data timestamp not null default now()'	    				+
+    'quantidade numeric(30) not null, '	    					      +
+    'data timestamp not null default now()'	    				    +
   ')'
 );
 
