@@ -9,5 +9,20 @@ module.exports = [{
     method: 'get',
     callback: require('./getById'),
     isAuth: true
+  },
+  {
+    path: '/carrinho/:cpf/:idProduto',
+    method: 'delete',
+    callback: require('./delete')
+  },
+  {
+    path: '/carrinho/:cpf/:idProduto',
+    method: 'put',
+    callback: require('./update')
+  },
+  {
+    path: '/carrinho/',
+    method: 'post',
+    callback: require('./post')
   }
 ];
