@@ -9,12 +9,14 @@ module.exports = function(req, res) {
   // Grab data from the URL parameters
   var idCliente = req.params.cpf;
   var idProduto = req.params.idProduto;
-  console.log('id is: ', id);
+  console.log('id is: ', idCliente);
 
   // Grab data from http request
   var data = {
-    quantidade: req.body.quantidade
+    quantidade: req.body.quantidade,
   };
+  console.log('body is: ', req.body);
+  console.log('quantidade is: ', data.quantidade);
 
   // Get a Postgres client from the connection pool
   pg.connect(connectionString, function(err, client, done) {
@@ -26,7 +28,7 @@ module.exports = function(req, res) {
     }
 
     // SQL Query > Update Data
-    client.query("UPDATE Carrinho SET quantidade=($1) WHERE cpf=($2) and idProduto=($3)", [data.quantidade,  idCliente, idProduto]);
+    client.query("UPDATE Carrinho SET quantidade=($1) WHERE cpf_cliente=($2) and id_produto=($3)", [data.quantidade,  idCliente, idProduto]);
 
     // SQL Query > Select Data
     var query = client.query("SELECT * FROM Carrinho");

@@ -11,7 +11,7 @@ module.exports = [{
     isAuth: true
   },
   {
-    path: '/carrinho/:cpf',
+    path: '/carrinho/:cpf/:idProduto',
     method: 'delete',
     callback: require('./delete')
   },
@@ -19,5 +19,10 @@ module.exports = [{
     path: '/carrinho/:cpf/:idProduto',
     method: 'put',
     callback: require('./update')
+  },
+  {
+    path: '/carrinho/',
+    method: 'post',
+    callback: require('./post')
   }
 ];
