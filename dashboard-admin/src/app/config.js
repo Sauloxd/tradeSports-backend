@@ -78,12 +78,30 @@ angular
             templateUrl: "components/form/form.html",
             data: { pageTitle: 'Atualizar Administrador' }
         })
+        .state('promocoes', {
+            abstract: true,
+            url: "/promocoes",
+            templateUrl: "components/common/content.html"
+        })
+         .state('promocoes.table', {
+            url: "/table",
+            controller: promocoesCtrl,
+            controllerAs: "vm",
+            templateUrl: "app/pages/promocoes/promocoes-table.html",
+            data: { pageTitle: 'Promocoes' }
+        })
+         .state('promocoes.update', {
+            url: "/putPromotion/:idPromocao",
+            controller: promocoesUpdateCtrl,
+            controllerAs: "vm",
+            templateUrl: "components/form/form.html",
+            data: { pageTitle: 'Update Promocoes' }
+        })
         .state('produto', {
             abstract: true,
             url: "/produto",
             templateUrl: "components/common/content.html"
         })
-
         .state('produto.table', {
             url: "/table",
             controller: produtoCtrl,
