@@ -14,5 +14,10 @@ module.exports = [{
     path: '/carrinho/:cpf',
     method: 'delete',
     callback: require('./delete')
+  },
+  {
+    path: '/carrinho/:cpf/:idProduto',
+    method: 'put',
+    callback: require('./update')
   }
 ];
