@@ -11,7 +11,7 @@ module.exports = function(req, res, next) {
   //If the path is non Secure, continue. No Validation needed
 
   for(var i = 0; i < nonSecurePaths.length; i++){
-    if ( nonSecurePaths[i].path == req.path && nonSecurePaths[i].method == req.method) {
+    if ( nonSecurePaths[i].path == req.path && (nonSecurePaths[i].method == req.method || nonSecurePaths[i].method == '*')) {
       return next();
     }
   }
