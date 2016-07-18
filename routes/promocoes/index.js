@@ -1,26 +1,16 @@
 module.exports = [{
-    path: '/promocao',
+    path: '/promocoes',
     method: 'get',
     callback: require('./get')
   },
   {
-    path: '/promocao/:idPromocao',
+    path: '/promocoes/:idPromocao',
     method: 'get',
     callback: require('./getById')
   },
   {
-    path: '/promocao',
-    method: 'post',
-    callback: require('./post')
-  },
-  {
-    path: '/promocao/:idPromocao',
+    path: '/promocoes/:idPromocao',
     method: 'put',
     callback: require('./update')
-  },
-  {
-    path: '/promocao/:idPromocao',
-    method: 'delete',
-    callback: require('./delete')
   }
 ];
