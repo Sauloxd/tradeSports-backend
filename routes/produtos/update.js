@@ -14,7 +14,7 @@ module.exports = function(req, res) {
     Valor: req.body.valor,
     Nome: req.body.nome,
     Imagem: req.body.imagem,
-    Descrição: req.body.descrição,
+    Descricao: req.body.descricao,
     Peso: req.body.peso,
     Tamanho: req.body.tamanho,
     Fabricante: req.body.fabricante,
@@ -32,7 +32,7 @@ module.exports = function(req, res) {
     }
 
     // SQL Query > Update Data
-    client.query("UPDATE Produto SET valor=($1), nome=($2), imagem=($3), descrição=($4), peso=($5), tamanho=($6), fabricante=($7), quantidade=($8), tipo=($9) WHERE idProduto=($10)", [data.Valor, data.Nome, data.Imagem, data.Descrição, data.Peso, data.Tamanho, data.Fabricante, data.Quantidade, data.Tipo, id]);
+    client.query("UPDATE Produto SET valor=($1), nome=($2), imagem=($3), descricao=($4), peso=($5), tamanho=($6), fabricante=($7), quantidade=($8), tipo=($9) WHERE idProduto=($10)", [data.Valor, data.Nome, data.Imagem, data.Descricao, data.Peso, data.Tamanho, data.Fabricante, data.Quantidade, data.Tipo, id]);
 
     // SQL Query > Select Data
     var query = client.query("SELECT * FROM Produto ORDER BY idProduto ASC");

@@ -20,7 +20,7 @@ var produtoAddCtrl = function (crudService, $state) {
     isRequired: true
   },
   {
-    name: 'Descrição',
+    name: 'Descricao',
     type: 'text',
     model: '',
     isRequired: true
@@ -60,7 +60,7 @@ var produtoAddCtrl = function (crudService, $state) {
 
     vm.formData.nome = "Tenis";
     vm.formData.valor = 999;
-    vm.formData.descrição = "Tenis de couro  com muito gliter, do jeito que o ricado gosta";
+    vm.formData.descricao = "Tenis de couro  com muito gliter, do jeito que o ricado gosta";
     vm.formData.peso = 999;
     vm.formData.fabricante = "Chineis";
     vm.formData.tamanho = "pequeno";
