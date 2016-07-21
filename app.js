@@ -8,26 +8,18 @@ var _           = require('underscore');
 //Project Dependencies
 var routes      = require('./routes');
 var auth        = require('./middlewares').auth;
-
 //FOR NOW, encapsulate this in a setup folder!
 
 var app = express();
 
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
-
-
 app.use(express.static('dashboard-admin/dist'));
-
 app.use(cors());
-
 app.use(morgan('dev'));
 
-
 //Authentication
-//Check for JWT in every of the below routes
 app.use(auth);
-
 
 //Adding routes
 var appRoutes = [];
@@ -37,8 +29,6 @@ _.forEach(routes, function(route){
   if (_.isArray(route)) appRoutes = _.union(appRoutes, route);
   else appRoutes.push(route);
 });
-
-// console.log(appRoutes);
 
 _.forEach(appRoutes, function(route){
   actions.push(cb(route));
@@ -55,5 +45,5 @@ function cb(route) {
 _(actions).reduceRight(_.wrap, function() { console.warn('Finished Adding routes!') })();
 
 app.listen(3000, function () {
-  console.log('The service is on port 3000!');
+  console.log('The magic happens on port 3000!');
 });

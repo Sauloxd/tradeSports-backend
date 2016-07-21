@@ -18,7 +18,7 @@ module.exports = function(req, res) {
     }
 
     // SQL Query > Select Data
-    var query = client.query("SELECT * FROM Carrinho WHERE cpf_cliente="+ _id +";");
+    var query = client.query("SELECT * FROM Carrinho as p LEFT JOIN Produto as prod ON prod.idProduto = p.id_produto LEFT JOIN Cliente as c  ON c.cpf = p.cpf_cliente WHERE c.cpf = " + _id + ";");
 
     // Stream results back one row at a time
     query.on('row', function(row) {
