@@ -123,6 +123,20 @@ angular
             templateUrl: "components/form/form.html",
             data: { pageTitle: 'Update Produto' }
         })
+
+        .state('carrinho', {
+            abstract: true,
+            url: "/carrinho",
+            templateUrl: "components/common/content.html"
+        })
+        .state('carrinho.table', {
+            url: "/table",
+            controller: carrinhoCtrl,
+            controllerAs: "vm",
+            templateUrl: "app/pages/carrinho/carrinho-table.html",
+            data: { pageTitle: 'Carrinho' }
+        })
+
         ;
 
     $urlRouterProvider.otherwise('login');

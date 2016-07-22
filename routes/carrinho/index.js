@@ -1,14 +1,12 @@
 module.exports = [{
     path: '/carrinho',
     method: 'get',
-    callback: require('./get'),
-    isAuth: true
+    callback: require('./get')
   },
   {
     path: '/carrinho/:cpf',
     method: 'get',
-    callback: require('./getById'),
-    isAuth: true
+    callback: require('./getById')
   },
   {
     path: '/carrinho/:cpf/:idProduto',
