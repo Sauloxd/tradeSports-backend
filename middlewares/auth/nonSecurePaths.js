@@ -3,6 +3,10 @@ module.exports = [{
   method: '*'
   },
   {
+    path: '/api/login/tradesports',
+    method: '*'
+  },
+  {
     path: '/api/produto',
     method: 'GET'
   }
