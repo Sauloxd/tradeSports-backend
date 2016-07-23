@@ -25,7 +25,7 @@ module.exports = function(req, res) {
     var queryVerify = client.query("SELECT quantidade FROM Carrinho WHERE cpf_cliente=($1) and id_produto=($2)",[data.CPF, data.idProduto]);
 
     // SQL Query > Insert Data
-    
+
 
     // SQL Query > Select Data
     var query = client.query("SELECT * FROM Carrinho ORDER BY cpf_cliente DESC LIMIT 1");

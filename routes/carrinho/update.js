@@ -8,12 +8,12 @@ module.exports = function(req, res) {
 
   // Grab data from the URL parameters
   var idCliente = req.params.cpf;
-  var idProduto = req.params.idProduto;
   console.log('id is: ', idCliente);
 
   // Grab data from http request
   var data = {
     quantidade: req.body.quantidade,
+    id_produto: req.body.id_produto
   };
   console.log('body is: ', req.body);
   console.log('quantidade is: ', data.quantidade);
@@ -28,7 +28,7 @@ module.exports = function(req, res) {
     }
 
     // SQL Query > Update Data
-    client.query("UPDATE Carrinho SET quantidade=($1) WHERE cpf_cliente=($2) and id_produto=($3)", [data.quantidade,  idCliente, idProduto]);
+    client.query("UPDATE Carrinho SET quantidade=($1) WHERE cpf_cliente=($2) and id_produto=($3)", [data.quantidade,  idCliente, data.id_produto]);
 
     // SQL Query > Select Data
     var query = client.query("SELECT * FROM Carrinho");
