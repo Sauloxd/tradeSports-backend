@@ -8,7 +8,7 @@ client.connect();
 var query = client.query(
   'CREATE TABLE IF NOT EXISTS Produto('  +
     'idProduto SERIAL PRIMARY KEY,'      +
-    'valor numeric(30) not null,'        +
+    'valor float(30) not null,'        +
     'nome varchar(255) not null,'        +
     'imagem varchar(255),'               +
     'descricao varchar(255) not null,'   +

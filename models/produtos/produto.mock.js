@@ -1,9 +1,7 @@
 var pg = require('pg');
 var path = require('path');
 var connectionString = require(path.join(__dirname, '../../', 'config')).connectionString;
-
-var client = new pg.Client(connectionString);
-client.connect();
+var _   = require('underscore');
 
 var marcas = ['Adidas', 'Nike', 'Converse', 'Lacoste', 'Topper', 'Mizuno', 'Vans', 'Puma', 'Reebok']
 var imagens = ['http://static1.netshoes.net/Produtos/tenis-puma-elsu-v2-perf-sl/46/D14-1109-846/D14-1109-846_detalhe1.jpg?resize=254:*',
@@ -22,59 +20,82 @@ var imagens = ['http://static1.netshoes.net/Produtos/tenis-puma-elsu-v2-perf-sl/
 'http://static1.netshoes.net/Produtos/chuteira-adidas-ace-164-fxg-campo/78/D13-3047-178/D13-3047-178_detalhe1.jpg?resize=254:*'
 ]
 var imagem;
-var tipos = ['Corrida', 'Social', 'Chuteira', 'Skate', 'Casual']
+var tipos = ['Corrida', 'Social', 'Chuteira', 'Skate', 'Casual'];
 var marca;
 var valor;
 var nome;
 var descricao;
 var peso;
-var tamanho;
+var tamanho = ['XS','XXS', 'S', 'M', 'L', 'XL', 'XXL'];
 var quantidade
 var tipo;
 var query;
 
-/**
- * Returns a random integer between min (inclusive) and max (inclusive)
- * Using Math.round() will give you a non-uniform distribution!
- */
-var getRandomInt = function(min, max) {
+var client = new pg.Client(connectionString);
+client.connect();
+var collection = [];
+
+var query = client.query("SELECT * FROM Produto where nome='tenis0';");
+query.on('row', function(row) {
+    console.log('tem coisa jah!');
+    client.end();
+    process.exit();
+});
+
+query.on('end', function (){
+  for(var i = 0; i < 20; i ++) {
+    collection.push(
+      'INSERT INTO Produto VALUES(' +
+        + i  + ","                 +
+        + parseFloat(getRandomFloat(50, 500).toFixed(2)) + ","                 +
+        "'tenis" + i  + "',"        +
+        "'" + imagens[i%imagens.length]  + "',"    +
+        "'Tenis Teste Numero " + i + "',"  +
+        getRandomInt(50, 500) + "," +
+        "'" + tamanho[i%tamanho.length]  + "',"    +
+        "'Fabricante " + i + "',"  +
+        getRandomInt(50, 500) + "," +
+        "'" + tipos[i%tipos.length]  + "'"    +
+      ')'
+    );
+  }
+  insertCollection(collection, closeConnection);
+})
+
+function closeConnection(err) {
+  if (err) {
+    console.log('deu ruim, nada foi adicionado :/');
+  } else {
+    console.log(' MOCK de Produtos Adicionado ao banco!!');
+  }
+  client.end();
+  return;
+}
+
+function insertCollection(collection, callback) {
+  var coll = collection.slice(0); // clone collection
+  (function insertOne() {
+    var record = coll.splice(0, 1)[0]; // get the first record of coll and reduce coll by one
+    var query = client.query(record);
+    query.on('error', function(err) {
+      console.log(err);
+      callback(err);
+    });
+    query.on('end', function() {
+      console.log('Foi adicionado esse produto: ', record);
+      if (coll.length == 0) {
+        callback();
+      } else {
+        setTimeout(insertOne, 0);
+      }
+    });
+  })();
+}
+
+function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-var randomizeParameters = function(i) {
-  valor = getRandomInt(50, 500)
-  marca = marcas[getRandomInt(0,8)]
-  nome = "Tenis " + marca + " " + valor + "/" + (i+1)
-  descricao = "Tenis teste número " + (i + 1)
-  peso = getRandomInt(1, 3)
-  tamanho = getRandomInt(35, 44)
-  quantidade = getRandomInt(0, 500)
-  tipo = tipos[getRandomInt(0, 4)]
-  imagem = imagens[getRandomInt(0, 14)]
-}
-
-for(var i = 0; i < 100; i ++) {
-
-  randomizeParameters(i);
-
-  query = client.query(
-    "INSERT INTO Produto VALUES("   +
-      i+", "                        +
-      valor+", "                    +
-      "'"+nome+"', "                +
-      "'"+imagem+"', "              +
-      "'"+descricao+"', "           +
-      peso+", "                     +
-      tamanho+", "                  +
-      "'"+marca+"', "               +
-      quantidade+", "               +
-      "'"+tipo+"'"                  +
-    ')'
-  );
-  if(i = 100) {
-    query.on('end', function() {
-      client.end();
-    });
-  }
-
+function getRandomFloat(min, max) {
+    return Math.random() * (max - min + 1) + min;
 }

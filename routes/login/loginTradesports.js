@@ -29,7 +29,7 @@ module.exports = function (req, res) {
     query.on('end', function() {
       done();
       if(!results.length) {
-        return res.status(403).json({ success: false, message: 'wrong_creds'});
+        return res.status(403).json({ success: false, message: 'login-failed'});
       } else {
         var token = jwt.sign(credential, config.secret, {
           expiresIn : 60*60*24 // 24h

@@ -33,7 +33,7 @@ checkCliente.on('end', function () {
               'INSERT INTO Carrinho VALUES('      +
                 cpfCliente[i].cpf + ","           +
                 idProduto[j].idproduto + ","      +
-                (i+1)         + ","                   +
+                (j+1)         + ","                   +
                 "'2011-05-16 15:36:38'"           +
               ')'
             );
