@@ -21,7 +21,7 @@ var produtoUpdateCtrl = function (crudService, $state, $stateParams) {
     isRequired: true
   },
   {
-    name: 'Descrição',
+    name: 'Descricao',
     type: 'text',
     model: '',
     isRequired: true

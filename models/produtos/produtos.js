@@ -11,7 +11,7 @@ var query = client.query(
     'valor numeric(30) not null,'        +
     'nome varchar(255) not null,'        +
     'imagem varchar(255),'               +
-    'descrição varchar(255) not null,'   +
+    'descricao varchar(255) not null,'   +
     'peso numeric(30) not null,'         +
     'tamanho varchar(255) not null,'     +
     'fabricante varchar(255) not null,'  +

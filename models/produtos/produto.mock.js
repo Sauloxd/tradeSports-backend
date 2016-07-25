@@ -48,14 +48,12 @@ var randomizeParameters = function(i) {
   descricao = "Tenis teste número " + (i + 1)
   peso = getRandomInt(1, 3)
   tamanho = getRandomInt(35, 44)
-  quantidade = getRandomInt(100, 500)
+  quantidade = getRandomInt(0, 500)
   tipo = tipos[getRandomInt(0, 4)]
   imagem = imagens[getRandomInt(0, 14)]
 }
 
-
-
-for(var i = 0; i < 99; i ++) {
+for(var i = 0; i < 100; i ++) {
 
   randomizeParameters(i);
 
@@ -73,26 +71,10 @@ for(var i = 0; i < 99; i ++) {
       "'"+tipo+"'"                  +
     ')'
   );
+  if(i = 100) {
+    query.on('end', function() {
+      client.end();
+    });
+  }
 
 }
-
-randomizeParameters(99);
-
-var queryF = client.query(
-  "INSERT INTO Produto VALUES("   +
-    i+", "                        +
-    valor+", "                    +
-    "'"+nome+"', "                +
-    "'"+imagem+"', "              +
-    "'"+descricao+"', "           +
-    peso+", "                     +
-    tamanho+", "                  +
-    "'"+marca+"', "               +
-    quantidade+", "               +
-    "'"+tipo+"'"                  +
-  ')'
-);
-
-queryF.on('end', function() {
-  client.end();
-});
