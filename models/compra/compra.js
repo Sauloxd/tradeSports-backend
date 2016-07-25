@@ -7,7 +7,7 @@ client.connect();
 
 var query = client.query(
   'CREATE TABLE IF NOT EXISTS Compra('       +
-    'idCompra numeric PRIMARY KEY,'        +
+    'idCompra SERIAL PRIMARY KEY,'        +
     'cpf_cliente numeric(11) REFERENCES cliente (cpf),' 		+
     'valor numeric(30) not null,'                           +
     'idEndereco integer REFERENCES Endereco (idEndereco),' 		+    
