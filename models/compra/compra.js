@@ -9,8 +9,8 @@ var query = client.query(
   'CREATE TABLE IF NOT EXISTS Compra('       +
     'idCompra numeric PRIMARY KEY,'        +
     'cpf_cliente numeric(11) REFERENCES cliente (cpf),' 		+
-    'valor numeric not null,'
-    'idEndereco numeric REFERENCES Endereco (idEndereco),' 		+    
+    'valor numeric(30) not null,'                           +
+    'idEndereco integer REFERENCES Endereco (idEndereco),' 		+    
     'metodo_de_pagamento varchar(255) not null,'    +
     'imagemNF varchar(255) not null,'    +
     'notaFiscal varchar(255) not null'    +

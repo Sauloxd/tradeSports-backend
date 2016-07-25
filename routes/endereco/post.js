@@ -36,11 +36,11 @@ module.exports = function(req, res) {
       'rua,'                                    +
       'numero,'                                 +
       'bairro,'                                 +
-      'cidade'                                  +
-      'estado'                                  +
-      'pais'                                    +
-      'cep'                                     +
-      'complemento'                             +
+      'cidade,'                                  +
+      'estado,'                                  +
+      'pais,'                                    +
+      'cep,'                                     +
+      'complemento,'                             +
       'cpf_cliente'                             +
     ') values($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)', [data.nome, data.rua, data.numero, data.bairro, data.cidade, data.estado, data.pais, data.cep, data.complemento, data.cpf_cliente]);
 
