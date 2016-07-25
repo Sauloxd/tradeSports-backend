@@ -11,7 +11,7 @@ var query = client.query(
     'nome varchar(255) not null,' 			    			+
     'rua varchar(255) unique not null,'  					+
     'numero varchar(255) not null,'  		   			 	+	
-    'bairro numeric(15) not null,'  		  				+
+    'bairro varchar(15) not null,'  		  				+
     'cidade varchar(255) not null,' 			    		+
     'estado varchar(255) not null,' 			    		+
     'pais varchar(255) not null,' 			    			+	
