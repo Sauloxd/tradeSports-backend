@@ -6,4 +6,4 @@ node funcionario/funcionario.js
 node promocoes/promocoes.js
 node carrinho/carrinho.js
 node endereco/endereco.js
-
+node compra/compra.js
