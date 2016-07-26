@@ -8,3 +8,4 @@ node carrinho/carrinho.js
 node endereco/endereco.js
 node compra/compra.js
 node entrega/entrega.js
+node produtoCompra/produtoCompra.js
