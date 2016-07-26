@@ -7,9 +7,9 @@ client.connect();
 
 var query = client.query(
   'CREATE TABLE IF NOT EXISTS ProdutoCompra('       +
-    'idCompra numeric REFERENCES Compra (idCompra),'        +
-    'idProduto numeric REFERENCES Produto (idProduto),' 		+
-    'quantidade numeric not null' +
+    'idCompra integer REFERENCES Compra (idCompra),'        +
+    'idProduto integer REFERENCES Produto (idProduto),' 		+
+    'quantidade numeric(30) not null' +
   ')'
 );
 
