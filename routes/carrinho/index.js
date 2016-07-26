@@ -14,12 +14,12 @@ module.exports = [{
     callback: require('./delete')
   },
   {
-    path: '/carrinho/:cpf/:idProduto',
+    path: '/carrinho/:cpf',
     method: 'put',
     callback: require('./update')
   },
   {
-    path: '/carrinho/',
+    path: '/carrinho',
     method: 'post',
     callback: require('./post')
   }

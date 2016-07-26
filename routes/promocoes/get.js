@@ -16,7 +16,7 @@ module.exports = function(req, res) {
     }
 
     // SQL Query > Select Data
-    var query = client.query("SELECT * FROM promocao ORDER BY idPromocao;");
+    var query = client.query("SELECT * FROM promocao WHERE estado='ativo';");
 
     // Stream results back one row at a time
     query.on('row', function(row) {

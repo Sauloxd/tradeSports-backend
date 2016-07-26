@@ -18,7 +18,19 @@ module.exports = function(req, res) {
     }
 
     // SQL Query > Select Data
-    var query = client.query("SELECT * FROM Carrinho as p LEFT JOIN Produto as prod ON prod.idProduto = p.id_produto LEFT JOIN Cliente as c  ON c.cpf = p.cpf_cliente WHERE c.cpf = " + _id + ";");
+    var query = client.query("SELECT "    +
+    "c.nome as c_nome,"                   +
+    "cart.quantidade as cart_quantidade," +
+    "prod.nome as prod_nome,"           +
+    "prod.valor as prod_valor,"           +
+    "prod.idProduto as prod_idProduto,"   +
+    "prod.imagem as prod_imagem,"         +
+    "prod.descrição as prod_description," +
+    "prod.peso as prod_peso,"             +
+    "prod.tamanho as prod_tamanho,"       +
+    "prod.fabricante as prod_fabricante," +
+    "prod.tipo as prod_tipo"              +
+    " FROM Carrinho as cart LEFT JOIN Produto as prod ON prod.idProduto = cart.id_produto LEFT JOIN Cliente as c  ON c.cpf = cart.cpf_cliente WHERE c.cpf = " + _id + ";");
 
     // Stream results back one row at a time
     query.on('row', function(row) {
