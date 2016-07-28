@@ -2,18 +2,14 @@ var path = require('path');
 var pg = require('pg');
 var connectionString = require(path.join(__dirname, '../', '../', 'config')).connectionString;
 
-
 module.exports = function(req, res) {
-  console.log('add was called!');
+
   var results = [];
 
-  // Grab data from http request
-  var data = {
-    idCompra: req.body.idCompra,
-    idProduto: req.body.idProduto,
-    quantidade: req.body.quantidade,
-    idEntrega: req.body.idEntrega
-  };
+  // Grab data from the URL parameters
+  var idCompra = req.params.idCompra;
+  var idProduto = req.params.idProduto
+
 
   // Get a Postgres client from the connection pool
   pg.connect(connectionString, function(err, client, done) {
@@ -24,16 +20,11 @@ module.exports = function(req, res) {
       return res.status(500).json({ success: false, data: err});
     }
 
-    // SQL Query > Insert Data
-    client.query('INSERT INTO ProdutoCompra('         +
-      'idCompra,'                                     +
-      'idProduto,'                                    +
-      'quantidade,'                                   +
-      'idEntrega'                                        +
-    ') values($1, $2, $3, $4)', [data.idCompra, data.idProduto, data.quantidade, data.idEntrega]);
+    // SQL Query > Delete Data
+    client.query("DELETE FROM produtocompra WHERE idCompra=($1) AND idProduto=($2)", [idCompra, idProduto]);
 
     // SQL Query > Select Data
-    var query = client.query("SELECT * FROM ProdutoCompra ORDER BY idCompra DESC LIMIT 1");
+    var query = client.query("SELECT * FROM produtocompra");
 
     // Stream results back one row at a time
     query.on('row', function(row) {
@@ -43,10 +34,8 @@ module.exports = function(req, res) {
     // After all data is returned, close connection and return results
     query.on('end', function() {
       done();
-      console.log(results);
       return res.json(results);
     });
-
-
   });
+
 }

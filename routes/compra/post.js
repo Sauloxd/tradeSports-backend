@@ -49,7 +49,7 @@ module.exports = function(req, res) {
     // After all data is returned, close connection and return results
     query.on('end', function() {
       done();
-      consolelog(results);
+      console.log(results);
       return res.json(results);
     });
 

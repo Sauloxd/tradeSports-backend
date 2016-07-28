@@ -6,10 +6,10 @@ var client = new pg.Client(connectionString);
 client.connect();
 
 var query = client.query(
-  'CREATE TABLE IF NOT EXISTS entrega('              		    +
-    'idEntrega SERIAL PRIMARY KEY,' 			    		          +
-    'idCompra numeric(11) REFERENCES compra (idCompra),' 		+
-    'prazo DATE not null'                                  +
+  'CREATE TABLE IF NOT EXISTS entrega('              		+
+    'idEntrega SERIAL PRIMARY KEY,' 			    		+
+    'idCompra integer REFERENCES compra (idCompra),' 	   	+
+    'prazo DATE not null'                                  	+
 
   ')'
 );
