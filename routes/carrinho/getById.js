@@ -20,13 +20,13 @@ module.exports = function(req, res) {
     var query = client.query("SELECT "    +
     "c.nome as c_nome,"                   +
     "cart.quantidade as cart_quantidade," +
+    "cart.tamanho as cart_tamanho," +
     "prod.nome as prod_nome,"             +
     "prod.valor as prod_valor,"           +
     "prod.idProduto as prod_idProduto,"   +
     "prod.imagem as prod_imagem,"         +
     "prod.descricao as prod_description," +
     "prod.peso as prod_peso,"             +
-    "prod.tamanho as prod_tamanho,"       +
     "prod.fabricante as prod_fabricante," +
     "prod.tipo as prod_tipo,"             +
     "prod.quantidade as prod_quantidade"  +

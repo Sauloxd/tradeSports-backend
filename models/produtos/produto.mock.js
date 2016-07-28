@@ -52,7 +52,7 @@ query.on('end', function (){
         "'" + imagens[i%imagens.length]  + "',"    +
         "'Tenis Teste Numero " + i + "',"  +
         getRandomInt(50, 500) + "," +
-        "'" + tamanho[i%tamanho.length]  + "',"    +
+        tamanho[i%tamanho.length] + "," +
         "'Fabricante " + i + "',"  +
         getRandomInt(50, 500) + "," +
         "'" + tipos[i%tipos.length]  + "'"    +

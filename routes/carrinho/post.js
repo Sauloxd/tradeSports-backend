@@ -13,9 +13,11 @@ var pool = new pg.Pool(config);
 
 module.exports = function(req, res) {
   var results = [];
-  var onCart = [];
+  var notOnCart = [];
+  var updateCart = [];
   var collectionToGet = [];
   var collectionToPost = [];
+  var collectionToUpdate = [];
 
   // Grab data from http request
   var data = {
@@ -29,7 +31,7 @@ module.exports = function(req, res) {
     if(err) {
       console.log(err);
       return res.status(500).json({ success: false, data: err});
-    }
+    };
 
     for(var i = 0; i < data.item.length; i++) {
       collectionToGet.push(
@@ -38,7 +40,7 @@ module.exports = function(req, res) {
         "id_produto="  + data.item[i].idProduto + " and " +
         "tamanho="  + data.item[i].tamanho + ";"
       );
-    }
+    };
     insertCollection(collectionToGet, postToCart);
 
     //     client.query("UPDATE Carrinho SET quantidade=($1) WHERE cpf_cliente=($2) and id_produto=($3)", [quant,  data.CPF, data.idProduto]);
@@ -49,7 +51,7 @@ module.exports = function(req, res) {
         console.log('deu ruim, nada foi adicionado :/');
       } else {
 
-          onCart.forEach((index)=>{
+          notOnCart.forEach((index)=>{
             collectionToPost.push(
               'INSERT INTO Carrinho('  +
               'cpf_cliente'   +
@@ -63,7 +65,24 @@ module.exports = function(req, res) {
               ");" );
           });
           console.log('col to post: ', collectionToPost);
-          insertCollection(collectionToPost, closeConnection);
+          if(!!collectionToPost[0]) {
+            console.log('post');
+            insertCollection(collectionToPost, closeConnection);
+          }
+          console.log('updatecart: > ', updateCart);
+          updateCart.forEach((index)=>{
+            collectionToUpdate.push(
+              "UPDATE Carrinho SET "+
+              "quantidade=" + data.item[index].quantidade +
+              " WHERE cpf_cliente="+ data.cpf_cliente +
+              " and tamanho="+ data.item[index].tamanho +
+              " and id_produto=" + data.item[index].idProduto + ";");
+          });
+          console.log('col to update: ', collectionToUpdate);
+          if(!!collectionToUpdate[0]) {
+              insertCollection(collectionToUpdate, closeConnection);
+          }
+
         }
       return;
     }
@@ -72,36 +91,35 @@ module.exports = function(req, res) {
       if(err){
         console.log('deu erro na hora do post! :x');
         done();
-        return res.json({success: false});
       } else {
         console.log('success!');
         done();
-        return res.json({success: true});
       }
-
+      return res.json({success: true});
     }
 
     function insertCollection(collection, callback) {
       var index = 0;
-      console.log('collection is: ', collection);
       var coll = collection.slice(0); // clone collection
       (function insertOne() {
-        console.log('my coll: ', coll);
         var record = coll.splice(0, 1)[0]; // get the first record of coll and reduce coll by one
+        console.log('QUERY: ', record);
         client.query(record, function(err, result){
-          console.log('my result : ', result);
           if(err) {
             console.log(err);
             callback(err);
           }
-
+          // console.log(result);
           if(result.rowCount == 0) {
-            onCart.push(index);
+            notOnCart.push(index);
+          }else {
+            updateCart.push(index);
           }
 
           if (coll.length == 0) {
 
-            console.log('há no carrinho os seguintes items paradas: ', onCart);
+            console.log('adicionar ', notOnCart);
+            console.log('atualizar ', updateCart);
             callback();
           } else {
             index ++;
