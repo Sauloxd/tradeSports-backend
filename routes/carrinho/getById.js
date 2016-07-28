@@ -6,7 +6,6 @@ module.exports = function(req, res) {
 
   var results = [];
   var _id = req.params.cpf;
-console.log('id is: ', _id);
 
   // Get a Postgres client from the connection pool
   pg.connect(connectionString, function(err, client, done) {
