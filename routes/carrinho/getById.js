@@ -6,7 +6,7 @@ module.exports = function(req, res) {
 
   var results = [];
   var _id = req.params.cpf;
-
+console.log('id is: ', _id);
 
   // Get a Postgres client from the connection pool
   pg.connect(connectionString, function(err, client, done) {
@@ -40,6 +40,12 @@ module.exports = function(req, res) {
 
     // After all data is returned, close connection and return results
     query.on('end', function() {
+      done();
+      return res.json(results);
+    });
+
+    query.on('error', function(err) {
+      console.log('error', err);
       done();
       return res.json(results);
     });

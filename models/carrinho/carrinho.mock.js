@@ -8,6 +8,7 @@ var client = new pg.Client(connectionString);
 client.connect();
 var collection = [];
 var cpfCliente = [];
+var tamanho = [35, 36, 37, 38, 39, 40, 41, 42, 43, 44];
 var checkCliente = client.query("SELECT cpf FROM cliente;");
 checkCliente.on('row', function(row) {
   cpfCliente.push(row);
@@ -34,6 +35,7 @@ checkCliente.on('end', function () {
                 cpfCliente[i].cpf + ","           +
                 idProduto[j].idproduto + ","      +
                 (j+1)         + ","                   +
+                tamanho[j%10] + ","      +
                 "'2011-05-16 15:36:38'"           +
               ')'
             );
