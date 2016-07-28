@@ -12,8 +12,6 @@ module.exports = function(req, res) {
 
   // Grab data from http request
   var data = {
-    idCompra: req.body.idCompra,
-    idProduto: req.body.idProduto,
     quantidade: req.body.quantidade,
     idEntrega: req.body.idEntrega
   };
@@ -28,7 +26,12 @@ module.exports = function(req, res) {
     }
 
     // SQL Query > Update Data
-    client.query("UPDATE produtoCompra SET quantidade=($1) idEntrega=($2) WHERE idCompra=($3) AND idProduto=($4)", [data.quantidade, data.idEntrega, idCompra, idProduto]);
+    if(data.quantidade !== undefined) {
+      client.query("UPDATE produtoCompra SET quantidade=($1) idEntrega=($2) WHERE idCompra=($3) AND idProduto=($4)", [data.quantidade, data.idEntrega, idCompra, idProduto]);
+    } else {
+      client.query("UPDATE produtoCompra SET idEntrega=($1) WHERE idCompra=($2) AND idProduto=($3)", [data.idEntrega, idCompra, idProduto]);
+
+    }
 
     // SQL Query > Select Data
     var query = client.query("SELECT * FROM produtocompra");

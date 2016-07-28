@@ -77,6 +77,36 @@ var produtoUpdateCtrl = function (crudService, $state, $stateParams) {
     crudService.update('produto', $stateParams.idproduto , vm.formData)
       .then(function(){
         $state.go('produto.table');
+
+        crudService.getById('produtoCompra', $stateParams.idproduto)
+          .then(function(response) {
+            if(response.data.length > 0) {
+              var quantidade = vm.formData.quantidade
+              for(var i = 0; i < response.data.length; i++) {
+                if(response.data[i].identrega == null && response.data[i].quantidade <= quantidade) {
+                  var data = {}
+                  data.idCompra = response.data[i].idcompra
+                  data.prazo = new Date()
+
+
+                  crudService.post('entrega', data).
+                    then(function(res) {
+                      var datapc = {}
+                      datapc.idEntrega = res.data[0].identrega
+
+                      crudService.update('produtoCompra', res.config.data.idCompra, datapc, $stateParams.idproduto)
+                  })
+
+                  quantidade = quantidade - response.data[i].quantidade
+
+                  var dataprod = {}
+                  dataprod.quantidade = quantidade
+
+                  crudService.update('produto', $stateParams.idproduto, dataprod)
+                }
+              }
+            }
+          })
       }, function(err){
         console.log('err', err);
       });
