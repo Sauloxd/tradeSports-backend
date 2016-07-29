@@ -1,65 +1,133 @@
 var path = require('path');
 var pg = require('pg');
 var connectionString = require(path.join(__dirname, '../', '../', 'config')).connectionString;
-
+var config = {
+  user: '', //env var: PGUSER
+  database: 'tradesportsdb', //env var: PGDATABASE
+  password: '', //env var: PGPASSWORD
+  port: 5432, //env var: PGPORT
+  max: 10, // max number of clients in the pool
+  idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed
+};
+var pool = new pg.Pool(config);
 
 module.exports = function(req, res) {
-  console.log('add was called!');
   var results = [];
+  var notOnCart = [];
+  var updateCart = [];
+  var collectionToGet = [];
+  var collectionToPost = [];
+  var collectionToUpdate = [];
 
   // Grab data from http request
   var data = {
-    CPF: req.body.cpf,
-    idProduto: req.body.idProduto,
-    quantidade: req.body.quantidade
-  };
+    item: req.body.item,
+    cpf_cliente: req.body.cpf_cliente
+  }
 
   // Get a Postgres client from the connection pool
-  pg.connect(connectionString, function(err, client, done) {
+  pool.connect(function(err, client, done) {
     // Handle connection errors
     if(err) {
-      done();
       console.log(err);
       return res.status(500).json({ success: false, data: err});
+    };
+
+    for(var i = 0; i < data.item.length; i++) {
+      collectionToGet.push(
+        "SELECT id_produto, tamanho, cpf_cliente FROM Carrinho WHERE " +
+        "cpf_cliente=" + data.cpf_cliente + " and " +
+        "id_produto="  + data.item[i].idProduto + " and " +
+        "tamanho="  + data.item[i].tamanho + ";"
+      );
+    };
+    insertCollection(collectionToGet, postToCart);
+
+    //     client.query("UPDATE Carrinho SET quantidade=($1) WHERE cpf_cliente=($2) and id_produto=($3)", [quant,  data.CPF, data.idProduto]);
+
+
+    function postToCart(err) {
+      if (err) {
+        console.log('deu ruim, nada foi adicionado :/');
+      } else {
+
+          notOnCart.forEach((index)=>{
+            collectionToPost.push(
+              'INSERT INTO Carrinho('  +
+              'cpf_cliente'   +
+              ', id_produto'     +
+              ', quantidade'     +
+              ', tamanho'        +
+              ") values( " + data.cpf_cliente +
+              ", "  + data.item[index].idProduto +
+              ", "   + data.item[index].quantidade +
+              ", "  + data.item[index].tamanho +
+              ");" );
+          });
+          console.log('col to post: ', collectionToPost);
+          if(!!collectionToPost[0]) {
+            console.log('post');
+            insertCollection(collectionToPost, closeConnection);
+          }
+          console.log('updatecart: > ', updateCart);
+          updateCart.forEach((index)=>{
+            collectionToUpdate.push(
+              "UPDATE Carrinho SET "+
+              "quantidade=" + data.item[index].quantidade +
+              " WHERE cpf_cliente="+ data.cpf_cliente +
+              " and tamanho="+ data.item[index].tamanho +
+              " and id_produto=" + data.item[index].idProduto + ";");
+          });
+          console.log('col to update: ', collectionToUpdate);
+          if(!!collectionToUpdate[0]) {
+              insertCollection(collectionToUpdate, closeConnection);
+          }
+
+        }
+      return;
     }
-    var queryVerify = client.query("SELECT quantidade FROM Carrinho WHERE cpf_cliente=($1) and id_produto=($2)",[data.CPF, data.idProduto]);
 
-    // SQL Query > Insert Data
-
-
-    // SQL Query > Select Data
-    var query = client.query("SELECT * FROM Carrinho ORDER BY cpf_cliente DESC LIMIT 1");
-
-    // Stream results back one row at a time
-    query.on('row', function(row) {
-      results.push(row);
-    });
-
-    // After all data is returned, close connection and return results
-    query.on('end', function() {
-      done();
-      return res.json(results);
-    });
-
-    // Stream results back one row at a time
-    queryVerify.on('row', function(row) {
-      results.push(row);
-    });
-
-    // After all data is returned, close connection and return results
-    queryVerify.on('end', function() {
-      if(results[0] == undefined){
-          client.query('INSERT INTO Carrinho('            +
-                        'cpf_cliente,'                                +
-                        'id_produto,'                                 +
-                        'quantidade'                                  +
-                        ') values($1, $2, $3)', [data.CPF, data.idProduto, data.quantidade]);
-      }else{
-        var quant = parseInt(results[0].quantidade) + parseInt(data.quantidade);
-        client.query("UPDATE Carrinho SET quantidade=($1) WHERE cpf_cliente=($2) and id_produto=($3)", [quant,  data.CPF, data.idProduto]);
+    function closeConnection(err) {
+      if(err){
+        console.log('deu erro na hora do post! :x');
+        done();
+      } else {
+        console.log('success!');
+        done();
       }
-    });
+      return res.json({success: true});
+    }
 
+    function insertCollection(collection, callback) {
+      var index = 0;
+      var coll = collection.slice(0); // clone collection
+      (function insertOne() {
+        var record = coll.splice(0, 1)[0]; // get the first record of coll and reduce coll by one
+        console.log('QUERY: ', record);
+        client.query(record, function(err, result){
+          if(err) {
+            console.log(err);
+            callback(err);
+          }
+          // console.log(result);
+          if(result.rowCount == 0) {
+            notOnCart.push(index);
+          }else {
+            updateCart.push(index);
+          }
+
+          if (coll.length == 0) {
+
+            console.log('adicionar ', notOnCart);
+            console.log('atualizar ', updateCart);
+            callback();
+          } else {
+            index ++;
+            setTimeout(insertOne, 0);
+          }
+        });
+      })();
+    }
 
   });
 }

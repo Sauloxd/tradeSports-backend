@@ -26,7 +26,7 @@ var valor;
 var nome;
 var descricao;
 var peso;
-var tamanho = ['XS','XXS', 'S', 'M', 'L', 'XL', 'XXL'];
+var tamanho = [35, 36, 37, 38, 39, 40, 41, 42, 43, 44];
 var quantidade
 var tipo;
 var query;
@@ -52,7 +52,7 @@ query.on('end', function (){
         "'" + imagens[i%imagens.length]  + "',"    +
         "'Tenis Teste Numero " + i + "',"  +
         getRandomInt(50, 500) + "," +
-        "'" + tamanho[i%tamanho.length]  + "',"    +
+        tamanho[i%tamanho.length] + "," +
         "'Fabricante " + i + "',"  +
         getRandomInt(50, 500) + "," +
         "'" + tipos[i%tipos.length]  + "'"    +
