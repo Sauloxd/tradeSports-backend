@@ -18,7 +18,7 @@ module.exports = function(req, res) {
     pais: req.body.pais,
     cep: req.body.cep,
     complemento: req.body.complemento,
-    cpf_cliente: req.body.cpf_cliente,
+    cpf_cliente: req.body.cpf_cliente
   };
 
   // Get a Postgres client from the connection pool
