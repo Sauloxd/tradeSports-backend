@@ -4,7 +4,7 @@ module.exports = [{
     callback: require('./get')
   },
   {
-    path: '/endereco/:idEndereco',
+    path: '/endereco/:idCliente',
     method: 'get',
     callback: require('./getById')
   },

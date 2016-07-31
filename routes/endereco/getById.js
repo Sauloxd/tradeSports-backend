@@ -5,7 +5,7 @@ var connectionString = require(path.join(__dirname, '../', '../', 'config')).con
 module.exports = function(req, res) {
 
   var results = [];
-  var _id = req.params.idEndereco;
+  var _id = req.params.idCliente;
 
 
   // Get a Postgres client from the connection pool
@@ -16,9 +16,8 @@ module.exports = function(req, res) {
       console.log(err);
       return res.status(500).json({ success: false, data: err});
     }
-
     // SQL Query > Select Data
-    var query = client.query("SELECT * FROM endereco WHERE idEndereco="+ _id +"ORDER BY idEndereco;");
+    var query = client.query("SELECT * FROM endereco WHERE cpf_cliente="+ _id +";");
 
     // Stream results back one row at a time
     query.on('row', function(row) {
@@ -27,11 +26,6 @@ module.exports = function(req, res) {
 
     // After all data is returned, close connection and return results
     query.on('end', function() {
-      results = results.map(function(obj){
-         var rObj = obj;
-         rObj['idEndereco'] = parseInt(obj.idEndereco);
-         return rObj;
-      });
       done();
       return res.json(results);
     });
