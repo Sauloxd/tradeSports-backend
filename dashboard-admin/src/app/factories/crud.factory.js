@@ -22,6 +22,16 @@ var crudService = function ($http, $q) {
       .get(TSConfig.urlBase + table + "/" + searchId)
   }
 
+  crud.getWithFilter = function(table, formData) {
+    return $http
+      .post(TSConfig.urlBase + table + "/filter", formData)
+      .then(function(response){
+        return response;
+      },function(response){
+          return $q.reject(response.data);
+    });
+  }
+
   crud.delete = function(table, id){
     return $http
       .delete(TSConfig.urlBase + table + "/" + id)
@@ -33,14 +43,8 @@ var crudService = function ($http, $q) {
   }
 
   crud.update = function(table, id, formData, id2){
-    if(id2 !== undefined) {
-      return $http
-        .put(TSConfig.urlBase + table + "/" + id + "/" + id2, formData)
-        .then(function(response){
-          return response;
-        },function(response){
-            return $q.reject(response.data);
-      });
+    if(id2 === undefined) {
+      id2 = ''
     }
 
     return $http
