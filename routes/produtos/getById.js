@@ -32,6 +32,7 @@ module.exports = function(req, res) {
          rObj['peso'] = parseInt(obj.peso);
          rObj['valor'] = parseInt(obj.valor);
          rObj['quantidade'] = parseInt(obj.quantidade);
+         rObj['genero'] = parseInt(obj.genero)
          return rObj;
       });
       done();

@@ -19,7 +19,8 @@ module.exports = function(req, res) {
     Tamanho: req.body.tamanho,
     Fabricante: req.body.fabricante,
     Quantidade: req.body.quantidade,
-    Tipo: req.body.tipo
+    Tipo: req.body.tipo,
+    Genero: req.body.genero
   };
 
   // Get a Postgres client from the connection pool
@@ -33,7 +34,7 @@ module.exports = function(req, res) {
 
     // SQL Query > Update Data
     if(data.Valor !== undefined) {
-      client.query("UPDATE Produto SET valor=($1), nome=($2), imagem=($3), descricao=($4), peso=($5), tamanho=($6), fabricante=($7), quantidade=($8), tipo=($9) WHERE idProduto=($10)", [data.Valor, data.Nome, data.Imagem, data.Descricao, data.Peso, data.Tamanho, data.Fabricante, data.Quantidade, data.Tipo, id]);
+      client.query("UPDATE Produto SET valor=($1), nome=($2), imagem=($3), descricao=($4), peso=($5), tamanho=($6), fabricante=($7), quantidade=($8), tipo=($9), genero=($10) WHERE idProduto=($11)", [data.Valor, data.Nome, data.Imagem, data.Descricao, data.Peso, data.Tamanho, data.Fabricante, data.Quantidade, data.Tipo, data.Genero, id]);
     } else {
       client.query("UPDATE Produto SET quantidade=($1) WHERE idProduto=($2)", [data.Quantidade, id])
     }

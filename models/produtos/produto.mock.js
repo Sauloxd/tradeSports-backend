@@ -30,6 +30,7 @@ var tamanho = [35, 36, 37, 38, 39, 40, 41, 42, 43, 44];
 var quantidade
 var tipo;
 var query;
+var genero = [0, 1, 2]
 
 var client = new pg.Client(connectionString);
 client.connect();
@@ -55,7 +56,8 @@ query.on('end', function (){
         tamanho[i%tamanho.length] + "," +
         "'Fabricante " + i + "',"  +
         getRandomInt(50, 500) + "," +
-        "'" + tipos[i%tipos.length]  + "'"    +
+        "'" + tipos[i%tipos.length]  + "',"    +
+        genero[i%genero.length] +
       ')'
     );
   }

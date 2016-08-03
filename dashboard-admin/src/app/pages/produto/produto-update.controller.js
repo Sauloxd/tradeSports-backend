@@ -55,6 +55,12 @@ var produtoUpdateCtrl = function (crudService, $state, $stateParams) {
     type: 'text',
     model: '',
     isRequired: true
+  },
+  {
+    name: 'Genero',
+    type: 'number',
+    model: '',
+    isRequired: true
   }];
 
 
