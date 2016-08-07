@@ -137,6 +137,20 @@ angular
             data: { pageTitle: 'Carrinho' }
         })
 
+
+        .state('entrega', {
+            abstract: true,
+            url: "/entrega",
+            templateUrl: "components/common/content.html"
+        })
+        .state('entrega.table', {
+            url: "/table",
+            controller: entregaCtrl,
+            controllerAs: "vm",
+            templateUrl: "app/pages/entregas/entrega-table.html",
+            data: { pageTitle: 'Entregas' }
+        })
+
         ;
 
     $urlRouterProvider.otherwise('login');

@@ -47,6 +47,13 @@
                 </ul>
             </li>
 
+            <li ng-class="{active: $state.includes('entrega')}">
+                <a><i class="fa fa-dashboard"></i> <span class="nav-label">Entregas</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li ui-sref-active="active"><a ui-sref="entrega.table"> <i class="fa fa-table"></i> Table </a></li>                    
+                </ul>
+            </li>
+
         </ul>
 
     </div>
