@@ -1,10 +1,11 @@
 var path = require('path');
 var pg = require('pg');
 var connectionString = require(path.join(__dirname, '../', '../', 'config')).connectionString;
+var creds = require(path.join(__dirname, '../', '../', 'credentials'));
 var config = {
-  user: '', //env var: PGUSER
+  user: creds.login, //env var: PGUSER
   database: 'tradesportsdb', //env var: PGDATABASE
-  password: '', //env var: PGPASSWORD
+  password: creds.senha, //env var: PGPASSWORD
   port: 5432, //env var: PGPORT
   max: 10, // max number of clients in the pool
   idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed
