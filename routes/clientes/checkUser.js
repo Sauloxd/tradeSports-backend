@@ -16,14 +16,20 @@ module.exports = function(req, res) {
       console.log(err);
       return res.status(500).json({ success: false, data: err});
     }
-
+    console.log('attr', _atributo);
+    console.log('q', _q);
     // SQL Query > Select Data
-    var query = client.query("SELECT cpf, nome, login, telefone, email FROM Cliente WHERE "+ _atributo +"="+ _q +";");
+    var query = client.query("SELECT cpf, nome, login, telefone, email FROM Cliente WHERE "+ _atributo +"='"+ _q +"';");
 
     console.log('query>', query);
     // Stream results back one row at a time
     query.on('row', function(row) {
         results.push(row);
+    });
+
+    query.on('error', function(row) {
+      done();
+      return res.json({success: false});
     });
 
     // After all data is returned, close connection and return results
