@@ -10,6 +10,11 @@
     callback: require('./getById')
   },
   {
+    path: '/produto/filter',
+    method: 'post',
+    callback: require('./getWithFilter')
+  },
+  {
     path: '/produto',
     method: 'post',
     callback: require('./post')

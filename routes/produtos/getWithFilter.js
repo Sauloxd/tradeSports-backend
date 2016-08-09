@@ -5,7 +5,11 @@ var connectionString = require(path.join(__dirname, '../', '../', 'config')).con
 module.exports = function(req, res) {
 
   var results = [];
-  var _id = req.params.idProduto;
+
+  var data = {
+    Genero: req.body.genero,
+    Tipo: req.body.tipo
+  }
 
 
   // Get a Postgres client from the connection pool
@@ -18,7 +22,38 @@ module.exports = function(req, res) {
     }
 
     // SQL Query > Select Data
-    var query = client.query("SELECT * FROM Produto WHERE idProduto="+ _id +"ORDER BY idProduto;");
+    var genderString = ''
+    if(data.Genero !== undefined) {
+      genderString += "("
+      for(var i = 0; i < data.Genero.length; i++) {
+        if(i == data.Genero.length - 1) {
+          genderString += "genero=" + data.Genero[i] + ") "
+        } else {
+          genderString += "genero=" + data.Genero[i] + " OR "
+        }
+      }
+    }
+
+    var typeString = ''
+    if(data.Tipo !== undefined) {
+      typeString = "("
+      for(var i = 0; i < data.Tipo.length; i++) {
+        if(i == data.Tipo.length - 1) {
+          typeString += "tipo='" + data.Tipo[i] + "') "
+        } else {
+          typeString += "tipo='" + data.Tipo[i] + "' OR "
+        }
+      }
+    }
+
+    var andString = ''
+    if(data.Tipo !== undefined && data.Genero !== undefined) {
+      andString = "AND "
+    }
+
+    var queryString = "SELECT * FROM Produto WHERE " + genderString + andString + typeString + "ORDER BY idProduto;"
+
+    var query = client.query(queryString)
 
     // Stream results back one row at a time
     query.on('row', function(row) {

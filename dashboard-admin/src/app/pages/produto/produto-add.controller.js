@@ -54,6 +54,12 @@ var produtoAddCtrl = function (crudService, $state) {
     type: 'text',
     model: '',
     isRequired: true
+  },
+  {
+    name: 'Genero',
+    type: 'number',
+    model: '',
+    isRequired: true
   }]
 
   vm.fillForm = function(){
@@ -66,6 +72,7 @@ var produtoAddCtrl = function (crudService, $state) {
     vm.formData.tamanho = "pequeno";
     vm.formData.quantidade = 99;
     vm.formData.tipo = "Calcado";
+    vm.formData.tipo = 1
 
     vm.htmlData.forms.forEach(function(curr, index, arr){
       curr.model = vm.formData[curr.name.toLowerCase()];
