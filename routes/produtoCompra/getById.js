@@ -5,7 +5,6 @@ var connectionString = require(path.join(__dirname, '../', '../', 'config')).con
 module.exports = function(req, res) {
 
   var results = [];
-  var _idCompra = req.params.idCompra;
   var _idProduto = req.params.idProduto;
 
 
@@ -19,7 +18,7 @@ module.exports = function(req, res) {
     }
 
     // SQL Query > Select Data
-    var query = client.query("SELECT * FROM produtocompra WHERE idCompra="+ _idCompra +" AND idProduto =" + _idProduto +";");
+    var query = client.query("SELECT * FROM produtocompra WHERE idProduto =" + _idProduto +";");
 
     // Stream results back one row at a time
     query.on('row', function(row) {
@@ -28,12 +27,6 @@ module.exports = function(req, res) {
 
     // After all data is returned, close connection and return results
     query.on('end', function() {
-      results = results.map(function(obj){
-         var rObj = obj;
-         rObj['idProduto'] = parseInt(obj.idProduto);
-         rObj['idCompra'] = parseInt(obj.idCompra);
-         return rObj;
-      });
       done();
       return res.json(results);
     });

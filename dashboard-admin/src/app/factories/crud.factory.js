@@ -6,7 +6,7 @@ var crudService = function ($http, $q) {
     return $http
       .post(TSConfig.urlBase + table, formData)
       .then(function(response){
-        return;
+        return response;
       },function(response){
           return $q.reject(response.data);
     });
@@ -32,7 +32,17 @@ var crudService = function ($http, $q) {
       });
   }
 
-  crud.update = function(table, id, formData){
+  crud.update = function(table, id, formData, id2){
+    if(id2 !== undefined) {
+      return $http
+        .put(TSConfig.urlBase + table + "/" + id + "/" + id2, formData)
+        .then(function(response){
+          return response;
+        },function(response){
+            return $q.reject(response.data);
+      });
+    }
+
     return $http
       .put(TSConfig.urlBase + table + "/" + id, formData)
       .then(function(response){
