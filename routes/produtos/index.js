@@ -28,5 +28,10 @@
     path: '/produto/:idProduto',
     method: 'delete',
     callback: require('./delete')
+  },
+  {
+    path: '/produto/nome/:nomeProduto',
+    method: 'get',
+    callback: require('./getByName')
   }
 ];
