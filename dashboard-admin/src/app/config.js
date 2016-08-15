@@ -136,8 +136,6 @@ angular
             templateUrl: "app/pages/carrinho/carrinho-table.html",
             data: { pageTitle: 'Carrinho' }
         })
-
-
         .state('entrega', {
             abstract: true,
             url: "/entrega",
@@ -149,6 +147,18 @@ angular
             controllerAs: "vm",
             templateUrl: "app/pages/entregas/entrega-table.html",
             data: { pageTitle: 'Entregas' }
+        })
+        .state('compras', {
+            abstract: true,
+            url: "/compras",
+            templateUrl: "components/common/content.html"
+        })
+         .state('compras.table', {
+            url: "/table",
+            controller: comprasCtrl,
+            controllerAs: "vm",
+            templateUrl: "app/pages/compras/compras-table.html",
+            data: { pageTitle: 'Compras' }
         })
 
         ;
