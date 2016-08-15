@@ -46,9 +46,19 @@ query.on('row', function(row) {
 query.on('end', function (){
   for(var i = 0; i < 20; i ++) {
     collection.push(
-      'INSERT INTO Produto VALUES(' +
-        + i  + ","                 +
-        + parseFloat(getRandomFloat(50, 500).toFixed(2)) + ","                 +
+      'INSERT INTO Produto(' +
+        'valor,'                          +
+        'nome,'                           +
+        'imagem,'                         +
+        'descricao,'                      +
+        'peso,'                           +
+        'tamanho,'                        +
+        'fabricante,'                     +
+        'quantidade,'                     +
+        'tipo,'                           +
+        'genero'                          +
+      ')  VALUES(' +
+        parseFloat(getRandomFloat(50, 500).toFixed(2)) + ","                 +
         "'tenis" + i  + "',"        +
         "'" + imagens[i%imagens.length]  + "',"    +
         "'Tenis Teste Numero " + i + "',"  +

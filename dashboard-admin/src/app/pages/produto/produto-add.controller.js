@@ -66,13 +66,13 @@ var produtoAddCtrl = function (crudService, $state) {
 
     vm.formData.nome = "Tenis";
     vm.formData.valor = 999;
-    vm.formData.descricao = "Tenis de couro  com muito gliter, do jeito que o ricado gosta";
+    vm.formData.descricao = "Tenis de couro  com muito gliter,";
     vm.formData.peso = 999;
     vm.formData.fabricante = "Chineis";
-    vm.formData.tamanho = "pequeno";
+    vm.formData.tamanho = 1;
     vm.formData.quantidade = 99;
-    vm.formData.tipo = "Calcado";
     vm.formData.tipo = 1
+    vm.formData.genero = 1
 
     vm.htmlData.forms.forEach(function(curr, index, arr){
       curr.model = vm.formData[curr.name.toLowerCase()];
@@ -87,6 +87,7 @@ var produtoAddCtrl = function (crudService, $state) {
   };
 
   vm.submitForm = function(){
+
     vm.htmlData.forms.forEach(function(curr, index, arr){
       vm.formData[curr.name.toLowerCase()] = curr.model;
     });
