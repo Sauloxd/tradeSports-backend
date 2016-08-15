@@ -29,12 +29,12 @@
                     <li ui-sref-active="active"><a ui-sref="produto.add"> <i class="fa fa-plus"></i> Add </a></li>
 
                 </ul>
-            </li>   
+            </li>
 
             <li ng-class="{active: $state.includes('promocoes')}">
                 <a><i class="fa fa-dashboard"></i> <span class="nav-label">Promoções</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li ui-sref-active="active"><a ui-sref="promocoes.table"> <i class="fa fa-table"></i> Table </a></li>                    
+                    <li ui-sref-active="active"><a ui-sref="promocoes.table"> <i class="fa fa-table"></i> Table </a></li>
                 </ul>
             </li>
 
@@ -50,9 +50,17 @@
             <li ng-class="{active: $state.includes('entrega')}">
                 <a><i class="fa fa-dashboard"></i> <span class="nav-label">Entregas</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li ui-sref-active="active"><a ui-sref="entrega.table"> <i class="fa fa-table"></i> Table </a></li>                    
+                    <li ui-sref-active="active"><a ui-sref="entrega.table"> <i class="fa fa-table"></i> Table </a></li>
                 </ul>
             </li>
+
+            <li ng-class="{active: $state.includes('compras')}">
+                <a><i class="fa fa-dashboard"></i> <span class="nav-label">Compras</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li ui-sref-active="active"><a ui-sref="compras.table"> <i class="fa fa-table"></i> Table </a></li>                    
+                </ul>
+            </li>
+
 
         </ul>
 
