@@ -19,7 +19,7 @@ app.use(cors());
 app.use(morgan('dev'));
 
 //Authentication
-//app.use(auth);
+// app.use(auth);
 
 //Adding routes
 var appRoutes = [];
