@@ -22,5 +22,10 @@ module.exports = [{
     path: '/cliente/:cpf',
     method: 'delete',
     callback: require('./delete')
+  },
+  {
+    path: '/cliente/check/:atributo/:q',
+    method: 'get',
+    callback: require('./checkUser')
   }
 ];

@@ -78,12 +78,30 @@ angular
             templateUrl: "components/form/form.html",
             data: { pageTitle: 'Atualizar Administrador' }
         })
+        .state('promocoes', {
+            abstract: true,
+            url: "/promocoes",
+            templateUrl: "components/common/content.html"
+        })
+         .state('promocoes.table', {
+            url: "/table",
+            controller: promocoesCtrl,
+            controllerAs: "vm",
+            templateUrl: "app/pages/promocoes/promocoes-table.html",
+            data: { pageTitle: 'Promocoes' }
+        })
+         .state('promocoes.update', {
+            url: "/putPromotion/:idPromocao",
+            controller: promocoesUpdateCtrl,
+            controllerAs: "vm",
+            templateUrl: "components/form/form.html",
+            data: { pageTitle: 'Update Promocoes' }
+        })
         .state('produto', {
             abstract: true,
             url: "/produto",
             templateUrl: "components/common/content.html"
         })
-
         .state('produto.table', {
             url: "/table",
             controller: produtoCtrl,
@@ -105,6 +123,44 @@ angular
             templateUrl: "components/form/form.html",
             data: { pageTitle: 'Update Produto' }
         })
+
+        .state('carrinho', {
+            abstract: true,
+            url: "/carrinho",
+            templateUrl: "components/common/content.html"
+        })
+        .state('carrinho.table', {
+            url: "/table",
+            controller: carrinhoCtrl,
+            controllerAs: "vm",
+            templateUrl: "app/pages/carrinho/carrinho-table.html",
+            data: { pageTitle: 'Carrinho' }
+        })
+        .state('entrega', {
+            abstract: true,
+            url: "/entrega",
+            templateUrl: "components/common/content.html"
+        })
+        .state('entrega.table', {
+            url: "/table",
+            controller: entregaCtrl,
+            controllerAs: "vm",
+            templateUrl: "app/pages/entregas/entrega-table.html",
+            data: { pageTitle: 'Entregas' }
+        })
+        .state('compras', {
+            abstract: true,
+            url: "/compras",
+            templateUrl: "components/common/content.html"
+        })
+         .state('compras.table', {
+            url: "/table",
+            controller: comprasCtrl,
+            controllerAs: "vm",
+            templateUrl: "app/pages/compras/compras-table.html",
+            data: { pageTitle: 'Compras' }
+        })
+
         ;
 
     $urlRouterProvider.otherwise('login');

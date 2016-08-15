@@ -16,7 +16,7 @@ module.exports = function(req, res) {
     }
 
     // SQL Query > Select Data
-    var query = client.query("SELECT * FROM Administrador ORDER BY nome;");
+    var query = client.query("SELECT * FROM Carrinho;");
 
     // Stream results back one row at a time
     query.on('row', function(row) {

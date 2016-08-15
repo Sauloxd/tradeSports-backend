@@ -11,12 +11,13 @@ module.exports = function(req, res) {
     Valor: req.body.valor,
     Nome: req.body.nome,
     Imagem: req.body.imagem,
-    Descrição: req.body.descrição,
+    Descricao: req.body.descricao,
     Peso: req.body.peso,
     Tamanho: req.body.tamanho,
     Fabricante: req.body.fabricante,
     Quantidade: req.body.quantidade,
-    Tipo: req.body.tipo
+    Tipo: req.body.tipo,
+    Genero: req.body.genero
   };
 
   // Get a Postgres client from the connection pool
@@ -33,13 +34,14 @@ module.exports = function(req, res) {
       'valor,'                          +
       'nome,'                           +
       'imagem,'                         +
-      'descrição,'                      +
+      'descricao,'                      +
       'peso,'                           +
       'tamanho,'                        +
       'fabricante,'                     +
       'quantidade,'                     +
-      'tipo'                            +
-    ') values($1, $2, $3, $4, $5, $6, $7, $8, $9)', [data.Valor, data.Nome, data.Imagem, data.Descrição, data.Peso, data.Tamanho, data.Fabricante, data.Quantidade, data.Tipo]);
+      'tipo,'                           +
+      'genero'                          +
+    ') values($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)', [data.Valor, data.Nome, data.Imagem, data.Descricao, data.Peso, data.Tamanho, data.Fabricante, data.Quantidade, data.Tipo, data.Genero]);
 
     // SQL Query > Select Data
     var query = client.query("SELECT * FROM Produto ORDER BY idProduto DESC LIMIT 1");

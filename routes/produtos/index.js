@@ -1,4 +1,4 @@
-module.exports = [
+  module.exports = [
   {
     path: '/produto',
     method: 'get',
@@ -8,6 +8,11 @@ module.exports = [
     path: '/produto/:idProduto',
     method: 'get',
     callback: require('./getById')
+  },
+  {
+    path: '/produto/filter',
+    method: 'post',
+    callback: require('./getWithFilter')
   },
   {
     path: '/produto',
@@ -23,5 +28,10 @@ module.exports = [
     path: '/produto/:idProduto',
     method: 'delete',
     callback: require('./delete')
+  },
+  {
+    path: '/produto/nome/:nomeProduto',
+    method: 'get',
+    callback: require('./getByName')
   }
 ];
