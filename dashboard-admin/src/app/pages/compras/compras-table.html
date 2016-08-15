@@ -18,7 +18,8 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="compra in vm.compras">
-                      <td>{{compra.estado}}</td>
+                      <td ng-if="compra.estado"> <span style="color: green;">{{compra.estadoType}}</span></td>
+                      <td ng-if="!compra.estado"> <span style="color: red;">{{compra.estadoType}}</span></td>
                       <td>{{compra.idcompra}}</td>
                       <td>{{compra.idendereco}}</td>
                       <td>{{compra.imagemnf}}</td>
@@ -26,7 +27,7 @@
                       <td>{{compra.notafiscal}}</td>
                       <td>{{compra.valor}}</td>
                       <td>
-                        <a ng-click="vm.confirm(compra.idcompra)">
+                        <a ng-click="vm.confirm(compra.idcompra, $index)">
                           <i class="fa fa-check"  aria-hidden="true" />
                         </a>
                       </td>

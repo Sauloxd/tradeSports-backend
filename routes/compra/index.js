@@ -9,7 +9,7 @@ module.exports = [{
     callback: require('./getById')
   },
   {
-    path: '/compra/:id/:idCompra',
+    path: '/compra/:idCompra',
     method: 'put',
     callback: require('./update')
   },
