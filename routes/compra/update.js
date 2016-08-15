@@ -11,7 +11,7 @@ module.exports = function(req, res) {
 
   // Grab data from http request
   var data = {
-    idCompra: req.body.estado,
+    estado: req.body.estado
   };
 
   // Get a Postgres client from the connection pool

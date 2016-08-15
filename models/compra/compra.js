@@ -14,7 +14,7 @@ var query = client.query(
     'metodo_de_pagamento varchar(255) not null,'    +
     'imagemNF varchar(255) not null,'    +
     'notaFiscal varchar(255) not null,'    +
-    'estado varchar(255) not null'   +
+    'estado integer not null'   +
   ')'
 );
 

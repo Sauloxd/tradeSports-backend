@@ -9,7 +9,12 @@ module.exports = [{
     callback: require('./getById')
   },
   {
-    path: '/compra/:id/:idCompra',
+    path: '/compraByClient/:id',
+    method: 'get',
+    callback: require('./getByClient')
+  },
+  {
+    path: '/compra/:idCompra',
     method: 'put',
     callback: require('./update')
   },
