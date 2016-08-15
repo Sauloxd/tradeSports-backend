@@ -4,7 +4,7 @@ var comprasCtrl = function (crudService, $state, $http, $q) {
     crudService.get('compra')
       .then(function(response){
         vm.compras = response.data;
-        vm.compras.forEach((item)=>{
+        vm.compras.forEach(function(item){
           if(item.estado == 0) {
             item.estado = false;
             item.estadoType = "Não confirmado!";
