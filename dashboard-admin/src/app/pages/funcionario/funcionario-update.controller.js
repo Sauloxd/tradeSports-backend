@@ -63,13 +63,16 @@ var funcionarioUpdateCtrl = function (crudService, $state, $stateParams) {
       vm.formData[curr.name.toLowerCase()] = curr.model;
     });
     console.log(vm.formData);
-    crudService.update('funcionario', $stateParams.cpf, vm.formData)
-      .then(function(){
-        console.log('Success!');
-        $state.go('usuario.funcionario');
-      }, function(err){
-        console.log('err', err);
-      });
+    if(vm.formData.email) {
+      crudService.update('funcionario', $stateParams.cpf, vm.formData)
+        .then(function(){
+          console.log('Success!');
+          $state.go('usuario.funcionario');
+        }, function(err){
+          console.log('err', err);
+        });
+    }
+
   };
 
   vm.resetForm = function(){
