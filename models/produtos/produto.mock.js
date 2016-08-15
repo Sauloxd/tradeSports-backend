@@ -47,17 +47,17 @@ query.on('end', function (){
   for(var i = 0; i < 1000; i ++) {
     collection.push(
       'INSERT INTO Produto(' +
-      'valor,'                          +
-      'nome,'                           +
-      'imagem,'                         +
-      'descricao,'                      +
-      'peso,'                           +
-      'tamanho,'                        +
-      'fabricante,'                     +
-      'quantidade,'                     +
-      'tipo,'                           +
-      'genero'                          +
-      ') VALUES(' +
+        'valor,'                          +
+        'nome,'                           +
+        'imagem,'                         +
+        'descricao,'                      +
+        'peso,'                           +
+        'tamanho,'                        +
+        'fabricante,'                     +
+        'quantidade,'                     +
+        'tipo,'                           +
+        'genero'                          +
+      ')  VALUES(' +
         parseFloat(getRandomFloat(50, 500).toFixed(2)) + ","                 +
         "'tenis" + i  + "',"        +
         "'" + imagens[i%imagens.length]  + "',"    +
