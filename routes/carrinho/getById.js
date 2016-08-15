@@ -29,7 +29,8 @@ module.exports = function(req, res) {
     "prod.peso as prod_peso,"             +
     "prod.fabricante as prod_fabricante," +
     "prod.tipo as prod_tipo,"             +
-    "prod.quantidade as prod_quantidade"  +
+    "prod.quantidade as prod_quantidade,"  +
+    "prod.genero as prod_genero"  +
     " FROM Carrinho as cart LEFT JOIN Produto as prod ON prod.idProduto = cart.id_produto LEFT JOIN Cliente as c  ON c.cpf = cart.cpf_cliente WHERE c.cpf = " + _id + ";");
 
     // Stream results back one row at a time
